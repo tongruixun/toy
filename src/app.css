@@ -1,0 +1,10 @@
+html,body {
+    padding: 0;
+    margin: 0;
+}
+
+.app {
+    width: 100%;
+    background-color: var(--bgColor);
+    background-image: url("./asset/common/bg_img.png");
+}
