@@ -9,7 +9,6 @@ const srcPath = path.resolve(__dirname, '../src')
 
 // 读取source/_posts目录下的所有文件
 const files = fs.readdirSync(postsPath);
-const posts = [];
 
 const rPrefixSep = /^(-{3,}|;{3,})/;
 const rFrontMatter = /^(-{3,}|;{3,})\r\n([\s\S]+?)\n\1\r\n?([\s\S]*)/;
@@ -45,6 +44,16 @@ function split(str) {
     return { content: str };
 }
 
+
+function keyBy(list, key, value) {
+    let result = {};
+    list.forEach(item => {
+        if(!result[item[key]]) result[item[key]] = value ? item[value] : item;
+    })
+
+    return result
+}
+
 marked.setOptions({
     highlight: function(code) {
         return hljs.highlightAuto(code).value;
@@ -59,8 +68,10 @@ marked.setOptions({
     xhtml: false
 });
 
+const posts = [];
+
 // 遍历读取markdown文件
-files.forEach((item) => {
+files.forEach((item, index) => {
 
     // 读取单个markdown文件中的内容
     const mdContent = fs.readFileSync(postsPath +'/'+ item, {encoding: "utf-8"});
@@ -68,9 +79,13 @@ files.forEach((item) => {
     const { data, content } = postData;
     postData.data = trxUtil.yaml2JavaScript(data);
     postData.content = marked(content);
+    postData.id = `post-${index}`;
     posts.push(postData);
 })
 
+
+
 // 将数据写入data.json
-fs.writeFile(srcPath + '/data.json', JSON.stringify(posts), e => console.log(e));
+fs.writeFile(srcPath + '/db/data.json', JSON.stringify(posts), e => console.log(e));
+fs.writeFile(srcPath + '/db/posts.json', JSON.stringify(keyBy(posts, 'id')), e => console.log(e));
 

@@ -35,7 +35,7 @@ module.exports = {
               exclude: /node_modules/,
               // options: { presets: ["@babel/env"] }
           },{
-              test: /\.(png|svg|jpg|gif)$/,
+              test: /\.(png|svg|jpg|gif|eot|woff|ttf)$/,
               use: 'file-loader'
           }
       ]

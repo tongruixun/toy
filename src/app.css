@@ -3,8 +3,18 @@ html,body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 .app {
     width: 100%;
+    padding-top: 64px;
+    min-height: calc(100vh - 64px);
+    position: relative;
     background-color: var(--bgColor);
     background-image: url("./asset/common/bg_img.png");
+}
+.selected.selected.selected {
+    color: #feba07;
 }

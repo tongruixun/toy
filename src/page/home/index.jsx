@@ -1,5 +1,5 @@
 import React from 'react';
-import posts from '../../data.json'
+import posts from '../../db/data.json'
 import Tags from "./tags";
 import PostCard from './postCard';
 import defaultCoverImg from '@/asset/common/cover_img.jpg'
@@ -7,7 +7,7 @@ import styles from './index.less'
 
 function Home() {
 
-    const postInfoList = () => posts.map(({data}, index) => <PostCard key={index} postInfo={data}/>)
+    const postInfoList = () => posts.map(({data, id}) => <PostCard key={id} id={id} postInfo={data}/>)
 
     const tagList = () => posts.map(({data: {tags}}) => tags);
 

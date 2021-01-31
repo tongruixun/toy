@@ -1,11 +1,10 @@
 import React from "react";
-import data from './data.json'
-import Home from '@/page/home'
+import NavBar from "./layout/NavBar";
 import 'highlight.js/styles/atom-one-dark.css';
+import './fonts/iconfont.css'
 import './app.css';
-import './index.css';
 
-function App() {
+function App(props) {
     // let html = '';
     // data.forEach(item => {
     //     const {content} = item;
@@ -13,7 +12,8 @@ function App() {
     // })
     // return <div dangerouslySetInnerHTML={{__html: html.replace(/<pre>/g, "<pre class='hljs'>")}} />
     return <div className='app'>
-        <Home />
+        <NavBar />
+        {props.children}
     </div>
 }
 
