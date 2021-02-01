@@ -13,7 +13,7 @@ function BasicRouter() {
         return <Switch>
             {
                 routesConfig.map((item, index) => {
-                    return <Route key={index} path={item.path}>
+                    return <Route exact={item.exact} key={index} path={item.path}>
                         <item.component>
                             {
                                 item.routes && renderRoute(item.routes)

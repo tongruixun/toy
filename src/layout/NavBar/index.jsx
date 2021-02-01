@@ -8,7 +8,7 @@ function NavBar() {
     const renderNav = (menuData) => {
         return menuData.map((item, index) => {
             if(item.hideMenu) return null;
-            return <NavLink activeClassName="selected" key={index} to={item.path}><span
+            return <NavLink activeClassName="selected" exact={item.exact} key={index} to={item.path}><span
                 className={`iconfont icon-${item.icon}`}/>&ensp;{item.title}</NavLink>
         })
     }

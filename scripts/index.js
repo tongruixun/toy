@@ -11,7 +11,8 @@ const srcPath = path.resolve(__dirname, '../src')
 const files = fs.readdirSync(postsPath);
 
 const rPrefixSep = /^(-{3,}|;{3,})/;
-const rFrontMatter = /^(-{3,}|;{3,})\r\n([\s\S]+?)\n\1\r\n?([\s\S]*)/;
+// linux \n 表示换行  windows \r\n 表示换行
+const rFrontMatter = /^(-{3,}|;{3,})\r?\n([\s\S]+?)\n\1\r?\n?([\s\S]*)/;
 const rFrontMatterNew = /^([\s\S]+?)\n(-{3,}|;{3,})\n?([\s\S]*)/;
 
 
@@ -28,7 +29,7 @@ function split(str) {
         };
     }
 
-    if (rPrefixSep.test(str)) return { content: str };
+    if (rPrefixSep.test(str)) return {content: str};
 
     const matchNew = str.match(rFrontMatterNew);
 

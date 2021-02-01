@@ -1,0 +1,61 @@
+.search {
+  position: relative;
+  height: 64px;
+  background-color: #ffffff;
+  margin-bottom: 24px;
+  width: 100%;
+
+  input {
+    padding: 0 64px 0 0;
+  }
+  svg {
+    position: absolute;
+    //transform: translateX(-300px);
+    width: 374px;
+    height: auto;
+    stroke: #b3c33a;
+    stroke-width: 1px;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 64.6 206.305;
+    transition: all 0.5s ease-in-out;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .searchLabel {
+    position: absolute;
+    display: block;
+    width: 76px;
+    height: 64px;
+    top: 0;
+    right: 0;
+    margin-left: -54px;
+    z-index: 100;
+    transition: 0.5s ease-in-out;
+  }
+  .inputLabel {
+    position: absolute;
+    width: calc(100% - 76px);
+    height: 64px;
+    top: 0;
+    right: 20px;
+    bottom: 0;
+    left: 0;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 50px;
+    color: #b3c33a;
+  }
+}
+
+.isActive {
+  .search-label {
+    transform: translateX(246px);
+  }
+  svg {
+    stroke-dashoffset: -65;
+    stroke-dasharray: 141.305 66;
+    transform: translateX(0);
+  }
+}
+

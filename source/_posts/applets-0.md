@@ -37,10 +37,10 @@ tags: 微信小程序
 
 
 一、媒体图片
-- `wx.choseImage(Object object)` 从本地相册或使用相机拍照
-- `wx.chooseMessageFile(Object object)` 从微信的聊天列表中选择文件
-- `wx.previewImage(Object object, boolean showmenu)` 在新页面中全屏预览图片。预览的过程中用户可以进行保存图片、发送给朋友等操作。
-- `wx.previewMedia(Object object, boolean showmenu)` 预览图片和视频
+1、 `wx.choseImage(Object object)` 从本地相册或使用相机拍照
+2、 `wx.chooseMessageFile(Object object)` 从微信的聊天列表中选择文件
+3、 `wx.previewImage(Object object, boolean showmenu)` 在新页面中全屏预览图片。预览的过程中用户可以进行保存图片、发送给朋友等操作。
+4、 `wx.previewMedia(Object object, boolean showmenu)` 预览图片和视频
 > https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.saveImageToPhotosAlbum.html
 
 二、 文件管理器

@@ -8,7 +8,7 @@ function PostCard({postInfo, id}) {
 
     const { title, coverImg, description, date, tags, categories } = postInfo;
     return <AnCard>
-        <Link to={`/postDetail/${id}`}>
+        <Link to={`/frontEnd/postDetail/${id}`}>
             <div className={styles.introduction}>
                 <div className={styles.imgWrap}>
                     <img src={coverImg || defaultCoverImg}/>
