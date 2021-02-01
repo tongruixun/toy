@@ -4,6 +4,7 @@ const marked = require('marked');
 const hljs = require('highlight.js');
 const trxUtil = require('trx-util');
 
+const rootPath = path.resolve(__dirname, '../')
 const postsPath = path.resolve(__dirname, '../source/_posts')
 const srcPath = path.resolve(__dirname, '../src')
 
@@ -87,6 +88,12 @@ files.forEach((item, index) => {
 
 
 // 将数据写入data.json
-fs.writeFile(srcPath + '/db/data.json', JSON.stringify(posts), e => console.log(e));
-fs.writeFile(srcPath + '/db/posts.json', JSON.stringify(keyBy(posts, 'id')), e => console.log(e));
+// fs.writeFile(srcPath + '/db/data.json', JSON.stringify(posts), e => console.log(e));
+// fs.writeFile(srcPath + '/db/posts.json', JSON.stringify(keyBy(posts, 'id')), e => console.log(e));
+
+const configYml = fs.readFileSync(rootPath +'/'+ '_config.yml', {encoding: "utf-8"});
+
+const configData = trxUtil.yaml2JavaScript(configYml);
+console.log(configData);
+fs.writeFile(srcPath + '/db/config.json', JSON.stringify(configData), e => console.log(e));
 

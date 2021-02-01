@@ -5,14 +5,26 @@
   height: 64px;
   background-color: #894e54;
   color: #ffffff;
+  display: flex;
   z-index: 9;
-  .nav {
-    height: 64px;
-    line-height: 64px;
-    a {
-      color: #ffffff;
-      text-decoration: none;
-      padding: 10px;
+  .header {
+    width: 40%;
+  }
+  .navBar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    .nav {
+      height: 64px;
+      line-height: 64px;
+      a {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px;
+      }
+    }
+    .search {
+      width: 300px;
     }
   }
 }

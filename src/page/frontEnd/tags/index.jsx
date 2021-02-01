@@ -7,6 +7,7 @@ function Tags(props) {
 
     const renderTag = (tagList) => {
         return tagList.map((item, index) => {
+            if(!item) return null;
             if (Array.isArray(item)) {
                 return renderTag(item);
             }
@@ -17,7 +18,10 @@ function Tags(props) {
 
     return <AnCard >
         <div className={styles.tags}>
-            {renderTag(props.tagList)}
+            <div className={styles.tagsHeader}>
+                <span className='iconfont icon-tags' />&ensp;<span className={styles.tagsTitle}>文章标签</span>
+            </div>
+            {renderTag(Array.from(new Set(props.tagList)))}
         </div>
     </AnCard>
 }

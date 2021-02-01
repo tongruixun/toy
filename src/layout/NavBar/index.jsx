@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import {menu} from "@/config/config";
 import styles from "./index.less"
+import {AnSearch} from "@/components";
 
 
 function NavBar() {
@@ -14,10 +15,18 @@ function NavBar() {
     }
    return (
        <div className={styles.wrap}>
-           <div className={styles.nav}>
-               {
-                   renderNav(menu[0].routes)
-               }
+           <div className={styles.header}>
+
+           </div>
+           <div className={styles.navBar}>
+               <div className={styles.search}>
+                   <AnSearch />
+               </div>
+               <div className={styles.nav}>
+                   {
+                       renderNav(menu[0].routes)
+                   }
+               </div>
            </div>
        </div>
    )
