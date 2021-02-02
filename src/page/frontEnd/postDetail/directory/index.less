@@ -1,0 +1,30 @@
+.directoryUl {
+  width: 325px;
+  max-width: calc(50vw - 408px);
+  display: inline;
+  border-left: 1px solid #a2a9b6;
+  margin-left: 30px;
+  position: fixed;
+  font-size: 14px;
+  text-align: left;
+  top: 180px;
+  .directoryLi {
+    display: block;
+    padding: 0 8px;
+    line-height: 24px;
+    margin-left: -2px;
+    border-left: 3px solid transparent;
+    color: #242934;
+    opacity: .6;
+    transition: opacity .2s;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .isActive {
+    border-left-color: #34538b;
+    color: #34538b;
+    opacity: 1;
+  }
+}

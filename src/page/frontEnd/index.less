@@ -1,12 +1,26 @@
 .wrap {
-  display: flex;
-  flex-wrap: wrap;
-  .main {
+  .head {
+    height: 48px;
+    background-color: #ffffff;
+    margin-bottom: 24px;
     display: flex;
     justify-content: center;
-    background-color: #ffffff;
-    margin-right: 24px;
-    flex: 1;
+    align-items: center;
+    div {
+      margin: 0 24px;
+    }
+  }
+  .contain {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 24px;
+    .main {
+      display: flex;
+      justify-content: center;
+      background-color: #ffffff;
+      margin-right: 24px;
+      flex: 1;
+    }
   }
 }
 

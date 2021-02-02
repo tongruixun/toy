@@ -15,7 +15,7 @@ a {
     background-color: var(--bgColor);
     background-image: url("./asset/common/bg_img.png");
 }
-.selected.selected.selected {
+.selected.selected.selected.selected {
     color: #feba07;
 }
 
