@@ -9,7 +9,7 @@ import './app.css';
 
 function App(props) {
 
-    return <div className='app' onScroll={e => console.log(e)}>
+    return <div className='app'>
         <NavBar />
         {props.children}
     </div>

@@ -8,10 +8,18 @@ function Directory(props) {
 
     const [curNav, setCurNav] = useState('');
     const [navList, setNavList] = useState([]);
+    const [fixed, setFixed] = useState(false);
+
+    const listenScrollTop = () => {
+        setFixed(document.documentElement.scrollTop > 112);
+    }
 
     useEffect(() => {
+
+        window.addEventListener('scroll', listenScrollTop);
         const {dirList} = props;
         let firstLevel = [];
+        // 只显示一级标题
         dirList.forEach(item => {
             if (firstLevel.length === 0) {
                 firstLevel.push(item);
@@ -27,6 +35,10 @@ function Directory(props) {
         })
         setCurNav(firstLevel[0].label)
         setNavList(firstLevel);
+
+        return () => {
+            window.removeEventListener('scroll', listenScrollTop)
+        }
     }, [])
 
 
@@ -40,7 +52,7 @@ function Directory(props) {
         }
     }
 
-    return <div className={styles.directoryUl}>
+    return <div className={cxBind({directoryUl: true, fixed})}>
         {
             navList.map(({label}, index) => {
                 return <div className={cxBind({directoryLi: true, isActive: curNav === label})} key={index} onClick={() => scrollToAnchor(label)}>{label}</div>

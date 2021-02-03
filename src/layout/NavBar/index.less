@@ -7,8 +7,12 @@
   color: #ffffff;
   display: flex;
   z-index: 9;
+  transition: opacity 2s;
   .header {
-    width: 40%;
+    width: 25%;
+    font-size: 24px;
+    line-height: 64px;
+    padding-left: 64px;
   }
   .navBar {
     flex: 1;
@@ -27,4 +31,7 @@
       width: 300px;
     }
   }
+}
+.show {
+  opacity: 0;
 }

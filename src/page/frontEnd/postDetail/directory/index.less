@@ -4,10 +4,10 @@
   display: inline;
   border-left: 1px solid #a2a9b6;
   margin-left: 30px;
-  position: fixed;
+  position: absolute;
   font-size: 14px;
   text-align: left;
-  top: 180px;
+  top: 48px;
   .directoryLi {
     display: block;
     padding: 0 8px;
@@ -21,10 +21,20 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
+    &:hover {
+      color: #34538b;
+      opacity: 1;
+    }
   }
   .isActive {
     border-left-color: #34538b;
     color: #34538b;
     opacity: 1;
   }
+}
+
+.fixed {
+  top: 84px;
+  position: fixed;
 }

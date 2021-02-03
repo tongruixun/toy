@@ -11,18 +11,23 @@ function Overview() {
 
     const [navList, setNavList] = useState([]);
     const [page, setPage] = useState({pageSize: 10, pageNum: 1});
-    let { tag } = useParams();
+    let { type, queryValue } = useParams();
     useEffect(() => {
         let dataSource = themes;
-        if(tag) {
+        if(type === 'tag') {
             dataSource = dataSource.filter(({data: {tags}}) => {
-                if (Array.isArray(tags) && tags.includes(tag)) return true;
-                return tags === tag;
+                if (Array.isArray(tags) && tags.includes(queryValue)) return true;
+                return tags === queryValue;
+            })
+        }
+        if(type === 'search') {
+            dataSource = dataSource.filter(({data: {title}}) => {
+                return title.toUpperCase().includes(queryValue.toUpperCase());
             })
         }
         const list = dataSource.filter((item, index) => index < page.pageSize*page.pageNum && index >= page.pageSize*page.pageNum - 10);
         setNavList(list);
-    }, [page, tag])
+    }, [page, queryValue])
 
     const onPageChange = (pageNum) => {
         setPage({...page, pageNum})

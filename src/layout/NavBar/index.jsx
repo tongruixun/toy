@@ -1,11 +1,31 @@
-import React from 'react';
-import { NavLink } from "react-router-dom";
+import React, {useState, useEffect} from 'react';
+import { NavLink, useHistory } from "react-router-dom";
+import classNames from "classnames/bind";
 import {menu} from "@/config/config";
+import {debounce} from "@/util/util";
 import styles from "./index.less"
 import {AnSearch} from "@/components";
 
+const cxBind = classNames.bind(styles);
 
 function NavBar() {
+
+    const [show, setShow] = useState(false);
+    let history = useHistory();
+    const onChange = debounce((value) => {
+        history.push(`/frontEnd/search/${value}`);
+    },500)
+    const listenScrollTop = () => {
+        setShow(document.documentElement.scrollTop >= 64);
+    }
+    useEffect(() => {
+        history.push(`/frontEnd`);
+        window.addEventListener('scroll', listenScrollTop);
+        return () => {
+            window.removeEventListener('scroll', listenScrollTop)
+        }
+    }, [])
+
     const renderNav = (menuData) => {
         return menuData.map((item, index) => {
             if(item.hideMenu) return null;
@@ -14,13 +34,13 @@ function NavBar() {
         })
     }
    return (
-       <div className={styles.wrap}>
+       <div className={cxBind({wrap: true, show})}>
            <div className={styles.header}>
-
+                有小鱼干么
            </div>
            <div className={styles.navBar}>
                <div className={styles.search}>
-                   <AnSearch />
+                   <AnSearch onChange={e => onChange(e.target.value)}/>
                </div>
                <div className={styles.nav}>
                    {

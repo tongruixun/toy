@@ -5,10 +5,6 @@ import {NavLink} from "react-router-dom";
 
 function FrontEnd(props) {
 
-    useEffect(() => {
-        // window.addEventListener('scroll', e => console.log(document.documentElement.scrollTop))
-    }, [])
-
     return (
         <div className={styles.wrap}>
             <div className={styles.head}>

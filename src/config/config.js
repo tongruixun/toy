@@ -40,7 +40,7 @@ const config = {
                             component: PostDetail
                         },{
                             title: '总览',
-                            path: '/frontEnd/tag/:tag',
+                            path: '/frontEnd/:type/:queryValue',
                             icon: 'FE',
                             component: Overview
                         },{

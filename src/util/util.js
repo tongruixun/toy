@@ -28,11 +28,24 @@ export function keyBy(list, key, value) {
 
 export function debounce(fn, delay) {
     let timer = null;
-    return function () {
+    return function (...args) {
         clearTimeout(timer);
 
         timer = setTimeout(() => {
+            fn(...args);
+        }, delay)
+    }
+}
 
-        })
+export function throttle(fn, delay) {
+    let timer = null;
+    return function (...args) {
+        if (!timer) {
+            timer = setTimeout(() => {
+                fn(...args);
+                clearTimeout(timer);
+                timer = null;
+            }, delay)
+        }
     }
 }
