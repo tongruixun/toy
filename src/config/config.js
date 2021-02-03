@@ -34,12 +34,17 @@ const config = {
                     component: FrontEnd,
                     routes: [
                         {
-                            title: '前端技术1',
+                            title: '全文',
                             path: '/frontEnd/postDetail/:id',
                             icon: 'FE',
                             component: PostDetail
                         },{
-                            title: '前端技术2',
+                            title: '总览',
+                            path: '/frontEnd/tag/:tag',
+                            icon: 'FE',
+                            component: Overview
+                        },{
+                            title: '总览',
                             path: '/frontEnd',
                             icon: 'FE',
                             component: Overview

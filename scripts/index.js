@@ -2,7 +2,6 @@ const trxUtil = require('trx-util');
 const dayjs = require('dayjs');
 
 const {split} = require('./util/frontMatter');
-const {keyBy} = require('./util/util');
 const {parseMarkDown} = require('./util/marked');
 const {readMarkDownDir, readMarkDownContent, writeFile} = require('./util/file');
 
@@ -20,7 +19,7 @@ function parsePostData(files) {
         const [article, directory] = parseMarkDown(content);
         postData.content = article;
         postData.directory = directory;
-        postData.id = `post-${index}`;
+        postData.id = item.split('.')[0];
         result.push(postData);
     })
     return result;
@@ -39,7 +38,6 @@ const configYml = readMarkDownContent('_config.yml');
 const configData = trxUtil.yaml2JavaScript(configYml);
 
 // 将数据写入json
-writeFile(sortList, `${dbPath}data.json`);
-writeFile(keyBy(sortList, 'id'), `${dbPath}posts.json`);
+writeFile(sortList, `${dbPath}posts.json`);
 writeFile(configData, `${dbPath}config.json`);
 

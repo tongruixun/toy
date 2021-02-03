@@ -1,9 +1,8 @@
 import React from 'react';
-import config from '@/db/config.json';
 import styles from './index.less'
 
-function SubNav() {
-    const {subNav} = config;
+function SubNav(props) {
+    const {subNav} = props;
     return <div className={styles.subNav}>
         {
             Object.keys(subNav).map((key, index) =>(

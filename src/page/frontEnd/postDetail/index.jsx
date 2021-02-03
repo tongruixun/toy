@@ -3,14 +3,13 @@ import {useParams} from 'react-router-dom';
 import {formatDate} from "@/util/util";
 import Directory from "./directory";
 import styles from './index.less'
-import postData from '../../../db/posts.json';
+import {postsMap} from "@/db";
 
 function PostDetail() {
     let { id } = useParams();
-    const html = postData[id].content;
-    const data = postData[id].data;
-    const directory = postData[id].directory;
-    console.log(directory);
+    const html = postsMap[id].content;
+    const data = postsMap[id].data;
+    const directory = postsMap[id].directory;
     return  <div className={styles.wrap}>
                 <div className={styles.entryNav}>
                     <Directory dirList={directory}/>

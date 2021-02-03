@@ -16,3 +16,23 @@ export function changeThemeColor(themes) {
 export function formatDate(date, format = 'YYYY-MM-DD') {
     return day(date).format(format);
 }
+
+export function keyBy(list, key, value) {
+    let result = {};
+    list.forEach(item => {
+        if(!result[item[key]]) result[item[key]] = value ? item[value] : item;
+    })
+
+    return result
+}
+
+export function debounce(fn, delay) {
+    let timer = null;
+    return function () {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+
+        })
+    }
+}

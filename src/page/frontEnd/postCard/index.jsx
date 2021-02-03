@@ -9,7 +9,9 @@ function PostCard({postInfo, id}) {
     return <AnCard>
             <div className={styles.introduction}>
                 <div className={styles.info}>
-                    <div className={styles.title}>{title}</div>
+                    <div className={styles.title}>
+                        <Link to={`/frontEnd/postDetail/${id}`}>{title}</Link>
+                    </div>
                     <div className={styles.desc}>{description}</div>
                     <div>{formatDate(date)}</div>
                     <div className={styles.readMore}>

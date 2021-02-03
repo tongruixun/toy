@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Sidebar from "./sidebar";
 import styles from './index.less'
 import {NavLink} from "react-router-dom";
 
 function FrontEnd(props) {
+
+    useEffect(() => {
+        // window.addEventListener('scroll', e => console.log(document.documentElement.scrollTop))
+    }, [])
 
     return (
         <div className={styles.wrap}>

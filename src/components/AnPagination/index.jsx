@@ -1,10 +1,11 @@
 import React from 'react';
+import classnames from "classnames";
 import styles from './index.less'
 
 function AnPagination(props) {
     const {total = 0, current, onChange} = props;
     return (
-        <div className={styles.pagination}>
+        <div className={(styles.pagination)}>
             {
                 total? <>
                     <div className={styles.pageIcon}>
@@ -14,9 +15,6 @@ function AnPagination(props) {
                                 <span onClick={()=>onChange(current - 1)} className='iconfont icon-shangyibu'/>
                             </>
                         }
-                    </div>
-                    <div className={styles.num}>
-                        {current}
                     </div>
                     <div className={styles.pageIcon}>
                         {
