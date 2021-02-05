@@ -19,7 +19,7 @@ npm install --save hexo-helper-live2d
 使用 `npm install {packagename}` 安装模型
 
 ```
-// 我使用的是 hijiki 一只黑色小猫
+// hijiki 一只黑色小猫
 npm install live2d-widget-model-hijiki
 ```
 
@@ -30,6 +30,7 @@ npm install live2d-widget-model-hijiki
 <!--more-->
 ## 三、添加配置
 
+#### 在hexo的根目录下的`_config.yml`中添加下面的内容
 ```yml
 
 # Live2D
@@ -48,7 +49,7 @@ live2d:
   tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
   debug: false # 调试, 是否在控制台输出日志
   model:
-    use: live2d-widget-model-hibiki
+    use: live2d-widget-model-hijiki
     # use: live2d-widget-model-wanko # npm-module package name
     # use: wanko # 博客根目录/live2d_models/ 下的目录名
     # use: ./wives/wanko # 相对于博客根目录的路径
