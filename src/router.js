@@ -4,9 +4,9 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import roureConfig from './config/config'
+import routeConfig from './config/config'
 
-const { routes } = roureConfig;
+const { routes } = routeConfig;
 
 function BasicRouter() {
     const renderRoute = (routesConfig) => {

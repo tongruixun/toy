@@ -47,6 +47,7 @@ const config = {
                             title: '总览',
                             path: '/frontEnd',
                             icon: 'FE',
+                            exact: true,
                             component: Overview
                         }
                     ]

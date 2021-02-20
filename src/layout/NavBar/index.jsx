@@ -19,7 +19,6 @@ function NavBar() {
         setShow(document.documentElement.scrollTop >= 64);
     }
     useEffect(() => {
-        history.push(`/frontEnd`);
         window.addEventListener('scroll', listenScrollTop);
         return () => {
             window.removeEventListener('scroll', listenScrollTop)
