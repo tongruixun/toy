@@ -1,10 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'main.js',
+        filename: 'js/main.js',
         path: path.resolve(__dirname, 'public')
     },
     module: {
@@ -35,12 +36,22 @@ module.exports = {
               exclude: /node_modules/,
               // options: { presets: ["@babel/env"] }
           },{
-              test: /\.(png|svg|jpg|gif|eot|woff|ttf)$/,
-              use: 'file-loader'
+              test: /\.(png|svg|jpg|gif)$/,
+              loader:  'file-loader',
+              options: {
+                  name: 'img/[name].[ext]?[hash]'
+              }
+          },{
+              test: /\.(eot|woff|ttf)$/,
+              loader: 'file-loader',
+              options: {
+                  name: 'font/[name].[ext]?[hash]'
+              }
           }
       ]
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: "src/index.html"
         })
