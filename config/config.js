@@ -55,7 +55,8 @@ module.exports = {
             cleanOnceBeforeBuildPatterns: ['public/.git'],
         }),
         new HtmlWebpackPlugin({
-            template: "src/index.html"
+            template: "src/index.html",
+            favicon: path.resolve('src/asset/favicon.ico')
         })
     ],
     resolve: {
