@@ -218,7 +218,7 @@
 			"date": "2021-01-27T10:56:30.000Z",
 			"tags": "webpack"
 		},
-		"content": "<a id=\"一、安装\"><h2>一、安装</h2></a>\n<pre class='hljs'><code class=\"language-bash\"> npm install webpack webpack-cli --<span class=\"hljs-built_in\">save</span>-<span class=\"hljs-built_in\">dev</span>\n</code></pre>\n<a id=\"二、基本配置\"><h2>二、基本配置</h2></a>\n<pre class='hljs'><code class=\"language-javascript\"><span class=\"hljs-keyword\">const</span> path = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">&#x27;path&#x27;</span>);\n<span class=\"hljs-keyword\">const</span> HtmlWebpackPlugin = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">&#x27;html-webpack-plugin&#x27;</span>)\n\n<span class=\"hljs-built_in\">module</span>.exports = {\n    <span class=\"hljs-attr\">entry</span>: <span class=\"hljs-string\">&#x27;./src/index.js&#x27;</span>,\n    <span class=\"hljs-attr\">output</span>: {\n        <span class=\"hljs-attr\">filename</span>: <span class=\"hljs-string\">&#x27;main.js&#x27;</span>,\n        <span class=\"hljs-attr\">path</span>: path.resolve(__dirname, <span class=\"hljs-string\">&#x27;public&#x27;</span>)\n    },\n    <span class=\"hljs-attr\">module</span>: {\n      <span class=\"hljs-attr\">rules</span>: [\n          {\n              <span class=\"hljs-attr\">test</span>: <span class=\"hljs-regexp\">/\\.css$/i</span>,\n              use: [<span class=\"hljs-string\">&#x27;style-loader&#x27;</span>, <span class=\"hljs-string\">&#x27;css-loader&#x27;</span>]\n          },{\n              <span class=\"hljs-attr\">test</span>: <span class=\"hljs-regexp\">/(\\.js?|\\.jsx?)$/i</span>, <span class=\"hljs-comment\">// 排除JSON文件</span>\n              use: <span class=\"hljs-string\">&#x27;babel-loader&#x27;</span>,\n              <span class=\"hljs-attr\">exclude</span>: <span class=\"hljs-regexp\">/node_modules/</span>,\n          },\n      ]\n    },\n    <span class=\"hljs-attr\">plugins</span>: [\n        <span class=\"hljs-keyword\">new</span> HtmlWebpackPlugin({\n            <span class=\"hljs-attr\">template</span>: <span class=\"hljs-string\">&quot;src/index.html&quot;</span>  <span class=\"hljs-comment\">// 以src下的HTML为模板创建打包后的index.html</span>\n        })\n    ],\n    <span class=\"hljs-attr\">mode</span>: <span class=\"hljs-string\">&quot;development&quot;</span>\n}\n</code></pre>\n<a id=\"问题及解决方案\"><h2>问题及解决方案</h2></a>\n<a id=\"一、 报错信息 Module not found: Error: Can't resolve 'fs' in 'D:\\tongruixun\\GithubRepository\\toy\"><h4>一、 报错信息 <code>Module not found: Error: Can&#39;t resolve &#39;fs&#39; in &#39;D:\\tongruixun\\GithubRepository\\toy</code></h4></a>\n<p>webpack5解决方案</p>\n<pre class='hljs'><code class=\"language-javascript\">  const <span class=\"hljs-built_in\">path</span> = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">&#x27;path&#x27;</span>);\n  \n  <span class=\"hljs-built_in\">module</span>.exports = {\n      entry: <span class=\"hljs-string\">&#x27;./index.js&#x27;</span>,\n      <span class=\"hljs-built_in\">output</span>: {\n          filename: <span class=\"hljs-string\">&#x27;main.js&#x27;</span>,\n          <span class=\"hljs-built_in\">path</span>: <span class=\"hljs-built_in\">path</span>.resolve(__dirname, <span class=\"hljs-string\">&#x27;public&#x27;</span>)\n      },\n      // 增加这个配置  webpack5\n      resolve: {\n          fallback: {\n              fs: <span class=\"hljs-literal\">false</span>\n          }\n      },\n      mode: <span class=\"hljs-string\">&quot;development&quot;</span>\n  }\n</code></pre>\n<a id=\"参考链接\"><h2>参考链接</h2></a>\n<blockquote>\n<p><a href=\"https://webpack.docschina.org/guides/output-management/#setting-up-htmlwebpackplugin\">https://webpack.docschina.org/guides/output-management/#setting-up-htmlwebpackplugin</a></p>\n</blockquote>\n",
+		"content": "<a id=\"一、安装\"><h2>一、安装</h2></a>\n<pre class='hljs'><code class=\"language-bash\"> npm install webpack webpack-cli --<span class=\"hljs-built_in\">save</span>-<span class=\"hljs-built_in\">dev</span>\n</code></pre>\n<a id=\"二、基本配置\"><h2>二、基本配置</h2></a>\n<pre class='hljs'><code class=\"language-javascript\">const path = require(<span class=\"hljs-string\">&#x27;path&#x27;</span>);\nconst HtmlWebpackPlugin = require(<span class=\"hljs-string\">&#x27;html-webpack-plugin&#x27;</span>)\n\nmodule.exports = {\n    entry: <span class=\"hljs-string\">&#x27;./src/index.js&#x27;</span>,\n    output: {\n        filename: <span class=\"hljs-string\">&#x27;main.js&#x27;</span>,\n        path: path.resolve(__dirname, <span class=\"hljs-string\">&#x27;public&#x27;</span>)\n    },\n    module: {\n      rules: [\n          {\n              test: <span class=\"hljs-regexp\">/\\.css$/i</span>,\n              use: [<span class=\"hljs-string\">&#x27;style-loader&#x27;</span>, <span class=\"hljs-string\">&#x27;css-loader&#x27;</span>]\n          },{\n              test: <span class=\"hljs-regexp\">/(\\.js?|\\.jsx?)$/i</span>, <span class=\"hljs-regexp\">//</span> 排除JSON文件\n              use: <span class=\"hljs-string\">&#x27;babel-loader&#x27;</span>,\n              exclude: <span class=\"hljs-regexp\">/node_modules/</span>,\n          },\n      ]\n    },\n    plugins: [\n        new HtmlWebpackPlugin({\n            template: <span class=\"hljs-string\">&quot;src/index.html&quot;</span>  <span class=\"hljs-regexp\">//</span> 以src下的HTML为模板创建打包后的index.html\n            <span class=\"hljs-regexp\">//</span> favicon: path.resolve(<span class=\"hljs-string\">&#x27;src/asset/favicon.ico&#x27;</span>)  <span class=\"hljs-regexp\">//</span> 设置网站图标\n        })\n    ],\n    mode: <span class=\"hljs-string\">&quot;development&quot;</span>\n}\n</code></pre>\n<a id=\"三、清理输出文件夹 clean-webpack-plugin\"><h2>三、清理输出文件夹 <code>clean-webpack-plugin</code></h2></a>\n<a id=\"一、clean-webpack-plugin的用法，版本号3.0.0\"><h4>一、<code>clean-webpack-plugin</code>的用法，版本号3.0.0</h4></a>\n<pre class='hljs'><code><span class=\"hljs-regexp\">//</span> 一、安装\nnpm install clean-webpack-plugin -S\n<span class=\"hljs-regexp\">//</span> 二、配置\nplugins: [\n    new CleanWebpackPlugin()\n]\n</code></pre>\n<a id=\"二、Options and Defaults(Optional)\"><h4>二、Options and Defaults(Optional)</h4></a>\n<pre class='hljs'><code class=\"language-javascript\"><span class=\"hljs-selector-tag\">new</span> <span class=\"hljs-selector-tag\">CleanWebpackPlugin</span>({\n    <span class=\"hljs-comment\">// Simulate the removal of files</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// default: false</span>\n    <span class=\"hljs-attribute\">dry</span>: true,\n \n    <span class=\"hljs-comment\">// Write Logs to Console</span>\n    <span class=\"hljs-comment\">// (Always enabled when dry is true)</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// default: false</span>\n    <span class=\"hljs-attribute\">verbose</span>: true,\n \n    <span class=\"hljs-comment\">// Automatically remove all unused webpack assets on rebuild</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// default: true</span>\n    <span class=\"hljs-attribute\">cleanStaleWebpackAssets</span>: false,\n \n    <span class=\"hljs-comment\">// Do not allow removal of current webpack assets</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// default: true</span>\n    <span class=\"hljs-attribute\">protectWebpackAssets</span>: false,\n \n    <span class=\"hljs-comment\">// **WARNING**</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// Notes for the below options:</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// They are unsafe...so test initially with dry: true.</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// Relative to webpack&#x27;s output.path directory.</span>\n    <span class=\"hljs-comment\">// If outside of webpack&#x27;s output.path directory,</span>\n    <span class=\"hljs-comment\">//    use full path. path.join(process.cwd(), &#x27;build/**/*&#x27;)</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// These options extend del&#x27;s pattern matching API.</span>\n    <span class=\"hljs-comment\">// See https://github.com/sindresorhus/del#patterns</span>\n    <span class=\"hljs-comment\">//    for pattern matching documentation</span>\n \n    <span class=\"hljs-comment\">// Removes files once prior to Webpack compilation</span>\n    <span class=\"hljs-comment\">//   Not included in rebuilds (watch mode)</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// Use !negative patterns to exclude files</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// default: [&#x27;**/*&#x27;]</span>\n    <span class=\"hljs-attribute\">cleanOnceBeforeBuildPatterns</span>: [<span class=\"hljs-string\">&#x27;**/*&#x27;</span>, <span class=\"hljs-string\">&#x27;!static-files*&#x27;</span>],\n    <span class=\"hljs-attribute\">cleanOnceBeforeBuildPatterns</span>: [], <span class=\"hljs-comment\">// disables cleanOnceBeforeBuildPatterns</span>\n \n    <span class=\"hljs-comment\">// Removes files after every build (including watch mode) that match this pattern.</span>\n    <span class=\"hljs-comment\">// Used for files that are not created directly by Webpack.</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// Use !negative patterns to exclude files</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// default: []</span>\n    <span class=\"hljs-attribute\">cleanAfterEveryBuildPatterns</span>: [<span class=\"hljs-string\">&#x27;static*.*&#x27;</span>, <span class=\"hljs-string\">&#x27;!static1.js&#x27;</span>],\n \n    <span class=\"hljs-comment\">// Allow clean patterns outside of process.cwd()</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// requires dry option to be explicitly set</span>\n    <span class=\"hljs-comment\">//</span>\n    <span class=\"hljs-comment\">// default: false</span>\n    <span class=\"hljs-attribute\">dangerouslyAllowCleanPatternsOutsideProject</span>: true,\n});\n</code></pre>\n<a id=\"问题及解决方案\"><h2>问题及解决方案</h2></a>\n<pre class='hljs'><code>\n<span class=\"hljs-comment\">## 参考链接</span>\n\n&gt; https:<span class=\"hljs-regexp\">//</span>webpack.docschina.org<span class=\"hljs-regexp\">/guides/</span>output-management/<span class=\"hljs-comment\">#setting-up-htmlwebpackplugin</span>\n</code></pre>\n",
 		"separator": "---",
 		"prefixSeparator": true,
 		"directory": [
@@ -231,15 +231,19 @@
 				"level": 2
 			},
 			{
-				"label": "问题及解决方案",
+				"label": "三、清理输出文件夹 clean-webpack-plugin",
 				"level": 2
 			},
 			{
-				"label": "一、 报错信息 Module not found: Error: Can't resolve 'fs' in 'D:\\tongruixun\\GithubRepository\\toy",
+				"label": "一、clean-webpack-plugin的用法，版本号3.0.0",
 				"level": 4
 			},
 			{
-				"label": "参考链接",
+				"label": "二、Options and Defaults(Optional)",
+				"level": 4
+			},
+			{
+				"label": "问题及解决方案",
 				"level": 2
 			}
 		],
@@ -247,16 +251,16 @@
 	},
 	{
 		"data": {
-			"title": "node(fs) 文件系统API",
+			"title": "node(一) 常用API",
 			"date": "2021-01-27T10:07:55.000Z",
 			"tags": "node"
 		},
-		"content": "<a id=\"一、目录操作\"><h2>一、目录操作</h2></a>\n<a id=\"一、读取目录\"><h4>一、读取目录</h4></a>\n<pre class='hljs'><code class=\"language-javascript\"><span class=\"hljs-regexp\">//</span> 引入fs模块\nconst fs = require(<span class=\"hljs-string\">&#x27;fs&#x27;</span>);\n<span class=\"hljs-regexp\">//</span> 同步读取目录下的文件，返回文件数组列表 元素是文件名和文件类型对的组合 文件名.文件类型\n<span class=\"hljs-regexp\">//</span> __dirname  当前模块的目录名\nconst files = fs.readdirSync(__dirname + <span class=\"hljs-string\">&#x27;/source/_posts&#x27;</span>);\n</code></pre>\n<!--more-->\n\n<a id=\"二、文件操作\"><h2>二、文件操作</h2></a>\n<pre class='hljs'><code class=\"language-javascript\"><span class=\"hljs-keyword\">const</span> fs = require(<span class=\"hljs-string\">&#x27;fs&#x27;</span>);\n<span class=\"hljs-comment\">// </span>\n<span class=\"hljs-keyword\">const</span> <span class=\"hljs-keyword\">file</span> = fs.readFileSync(__dirname + <span class=\"hljs-string\">&#x27;/source/_posts/&#x27;</span> + files[<span class=\"hljs-number\">2</span>]);\n</code></pre>\n<a id=\"参考链接\"><h2>参考链接</h2></a>\n<blockquote>\n<p><a href=\"http://nodejs.cn/api/fs.html#fs_fs_readfile_path_options_callback\">http://nodejs.cn/api/fs.html#fs_fs_readfile_path_options_callback</a></p>\n</blockquote>\n",
+		"content": "<a id=\"一、目录操作fs\"><h2>一、目录操作fs</h2></a>\n<a id=\"一、读取目录\"><h4>一、读取目录</h4></a>\n<pre class='hljs'><code class=\"language-javascript\"><span class=\"hljs-regexp\">//</span> 引入fs模块\nconst fs = require(<span class=\"hljs-string\">&#x27;fs&#x27;</span>);\n<span class=\"hljs-regexp\">//</span> 同步读取目录下的文件，返回文件数组列表 元素是文件名和文件类型对的组合 文件名.文件类型\n<span class=\"hljs-regexp\">//</span> __dirname  当前模块的目录名\nconst files = fs.readdirSync(__dirname + <span class=\"hljs-string\">&#x27;/source/_posts&#x27;</span>);\n</code></pre>\n<!--more-->\n\n<a id=\"二、文件操作\"><h4>二、文件操作</h4></a>\n<pre class='hljs'><code class=\"language-javascript\"><span class=\"hljs-keyword\">const</span> fs = require(<span class=\"hljs-string\">&#x27;fs&#x27;</span>);\n<span class=\"hljs-comment\">// </span>\n<span class=\"hljs-keyword\">const</span> <span class=\"hljs-keyword\">file</span> = fs.readFileSync(__dirname + <span class=\"hljs-string\">&#x27;/source/_posts/&#x27;</span> + files[<span class=\"hljs-number\">2</span>]);\n</code></pre>\n<a id=\"二、process\"><h2>二、process</h2></a>\n<p>process 对象是一个全局变量，提供了有关当前 Node.js 进程的信息并对其进行控制。</p>\n<a id=\"一、常用方法\"><h4>一、常用方法</h4></a>\n<pre class='hljs'><code class=\"language-javascript\"><span class=\"hljs-comment\">// 当前工作目录</span>\n<span class=\"hljs-built_in\">process</span>.cwd();\n</code></pre>\n<a id=\"参考链接\"><h2>参考链接</h2></a>\n<blockquote>\n<p><a href=\"http://nodejs.cn/api/fs.html#fs_fs_readfile_path_options_callback\">http://nodejs.cn/api/fs.html#fs_fs_readfile_path_options_callback</a></p>\n</blockquote>\n",
 		"separator": "---",
 		"prefixSeparator": true,
 		"directory": [
 			{
-				"label": "一、目录操作",
+				"label": "一、目录操作fs",
 				"level": 2
 			},
 			{
@@ -265,14 +269,22 @@
 			},
 			{
 				"label": "二、文件操作",
+				"level": 4
+			},
+			{
+				"label": "二、process",
 				"level": 2
+			},
+			{
+				"label": "一、常用方法",
+				"level": 4
 			},
 			{
 				"label": "参考链接",
 				"level": 2
 			}
 		],
-		"id": "node-fs"
+		"id": "node-1"
 	},
 	{
 		"data": {

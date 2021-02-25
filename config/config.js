@@ -52,11 +52,10 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin( {
-            cleanOnceBeforeBuildPatterns: ['public/.git'],
+            cleanOnceBeforeBuildPatterns: ['**/*', '!.git'],
         }),
         new HtmlWebpackPlugin({
             template: "src/index.html",
-            favicon: path.resolve('src/asset/favicon.ico')
         })
     ],
     resolve: {

@@ -1,10 +1,10 @@
 ---
-title: node(fs) 文件系统API
+title: node(一) 常用API
 date: 2021-01-27 10:07:55
 tags: node
 ---
 
-## 一、目录操作
+## 一、目录操作fs
 
 #### 一、读取目录
 
@@ -17,13 +17,21 @@ const files = fs.readdirSync(__dirname + '/source/_posts');
 ```
 <!--more-->
 
-## 二、文件操作
+#### 二、文件操作
 ```javascript
 const fs = require('fs');
 // 
 const file = fs.readFileSync(__dirname + '/source/_posts/' + files[2]);
 ```
 
+## 二、process
+process 对象是一个全局变量，提供了有关当前 Node.js 进程的信息并对其进行控制。
+#### 一、常用方法
+
+```javascript
+// 当前工作目录
+process.cwd();
+```
 
 ## 参考链接
 
