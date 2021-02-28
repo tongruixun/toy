@@ -10,7 +10,7 @@ tags: npm
 
 #### 二、在目录下执行 `npm init` (默认已安装node环境)
 ```bash
-D:\tongruixun\GithubRepository\trx-util>npm init
+D:\tongruixun\GithubRepository\trx-util>node init
 ```
 
 <!--more-->
@@ -33,18 +33,18 @@ module.exports.func = func;
 
 ```bash
 // 登录  本地模块文件
-D:\tongruixun\GithubRepository\trx-util>npm adduser
+D:\tongruixun\GithubRepository\trx-util>node adduser
 Username: tongruixun
 Password:
 Email: (this IS public) 1*****4342@qq.com
 Logged in as tongruixun on https://registry.npmjs.org/.
 
 // 查看登录用户
-D:\tongruixun\GithubRepository\trx-util>npm whoami
+D:\tongruixun\GithubRepository\trx-util>node whoami
 tongruixun
 
 // 发布模块到npm
-D:\tongruixun\GithubRepository\trx-util>npm publish
+D:\tongruixun\GithubRepository\trx-util>node publish
 
 
 ```
@@ -66,7 +66,7 @@ D:\tongruixun\GithubRepository\trx-util>npm publish
 
 #### 一、安装
 ```bash
-npm install trx-util
+node install trx-util
 ```
 
 #### 二、使用

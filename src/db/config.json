@@ -1,17 +1,13 @@
 {
 	"subNav": {
 		"github": "https://gihub.com/tongruixun",
-		"gitee": "https://gitee.com/tongruixun",
-		"weixin": null,
-		"qq": null,
-		"bilibili": null,
-		"zhifubao": null,
-		"Gitlab-fill": null,
-		"yuque-fill": null,
-		"twitter": null,
-		"weibo": null,
-		"zhihu": null,
-		"email": null,
-		"juejin": null
-	}
+		"gitee": "https://gitee.com/tongruixun"
+	},
+	"source_dir": "source",
+	"posts_dir": "_posts",
+	"template_dir": "template",
+	"post_template": "post.md",
+	"datasource_dir": "src/db",
+	"posts_db_name": "posts.json",
+	"config_db_name": "config.json"
 }

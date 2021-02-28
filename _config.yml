@@ -1,14 +1,26 @@
 subNav:
   github: "https://gihub.com/tongruixun"
   gitee: "https://gitee.com/tongruixun"
-  weixin: #
-  qq: #
-  bilibili: #
-  zhifubao: #
-  Gitlab-fill: #
-  yuque-fill: #
-  twitter: #
-  weibo: #
-  zhihu: #
-  email: #
-  juejin: #
+  # weixin: #
+  # qq: #
+  # bilibili: #
+  # zhifubao: #
+  # Gitlab-fill: #
+  # yuque-fill: #
+  # twitter: #
+  # weibo: #
+  # zhihu: #
+  # email: #
+  # juejin: #
+
+# Directory
+source_dir: source
+posts_dir: _posts
+
+template_dir: template
+post_template: post.md
+
+# Writing
+datasource_dir: src/db # 数据写入的目录
+posts_db_name: posts.json
+config_db_name: config.json

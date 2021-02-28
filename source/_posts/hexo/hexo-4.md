@@ -50,7 +50,7 @@ live2d:
   debug: false # 调试, 是否在控制台输出日志
   model:
     use: live2d-widget-model-hijiki
-    # use: live2d-widget-model-wanko # npm-module package name
+    # use: live2d-widget-model-wanko # node-module package name
     # use: wanko # 博客根目录/live2d_models/ 下的目录名
     # use: ./wives/wanko # 相对于博客根目录的路径
     # use: https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url

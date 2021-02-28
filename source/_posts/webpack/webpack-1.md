@@ -7,7 +7,7 @@ tags: webpack
 ## 一、安装
 
 ```bash
- npm install webpack webpack-cli --save-dev
+ node install webpack webpack-cli --save-dev
 ```
 
 ## 二、基本配置

@@ -8,12 +8,12 @@ tags: less
 
 #### 一、安装less
 ```bash
-npm install less --save-dev
+node install less --save-dev
 ```
 #### 二、安装less-loader
 
 ```bash
-npm install less-loader --save-dev
+node install less-loader --save-dev
 ```
 ## 二、基本用法
 

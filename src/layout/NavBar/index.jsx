@@ -38,13 +38,13 @@ function NavBar() {
                 有小鱼干么
            </div>
            <div className={styles.navBar}>
-               <div className={styles.search}>
-                   <AnSearch onChange={e => onChange(e.target.value)}/>
-               </div>
                <div className={styles.nav}>
                    {
                        renderNav(menu[0].routes)
                    }
+               </div>
+               <div className={styles.search}>
+                   <AnSearch onChange={e => onChange(e.target.value)}/>
                </div>
            </div>
        </div>

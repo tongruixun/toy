@@ -10,8 +10,8 @@ trx g
 #### 二、启用webpack 编译项目
 ```bash
 # 项目使用webpack打包
-npm run build
+node run build
 
 # 本地启动
-npm run dev
+node run dev
 ```

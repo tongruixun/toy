@@ -3,30 +3,6 @@
   padding: 12px 24px 24px;
   position: relative;
 
-  pre {
-    border-radius: 5px;
-  }
-  blockquote {
-    padding: 10px 0;
-    margin: 10px 0 0;
-    border-left: 5px solid #657b83;
-    background: #f6f6f6;
-    overflow: auto;
-  }
-
-  blockquote a {
-    margin-top: 10px;
-    display: block;
-    width: 100%;
-    color: #5cb3cc;
-    white-space: nowrap;
-  }
-  h2 {
-    font-weight: 700;
-    color: #574c4c;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ddd;
-  }
   .entryNav {
     position: relative;
     text-align: right;
@@ -57,5 +33,51 @@
         }
       }
     }
+  }
+
+
+  pre {
+    border-radius: 5px;
+  }
+  blockquote {
+    margin-top: 20px;
+    border-left: 5px solid #657b83;
+    background: #f6f6f6;
+  }
+
+  blockquote a {
+    display: block;
+    width: 100%;
+    color: #5cb3cc;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+
+  p code {
+    border: 1px solid #e7eaed;
+    background-color: #f3f4f4;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #F5F5F5;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #AAA;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(0deg,
+    rgba(0, 0, 0, .2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, .2) 50%,
+    rgba(0, 0, 0, .2) 75%,
+    transparent 75%,
+    transparent)
+  }
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
   }
 }

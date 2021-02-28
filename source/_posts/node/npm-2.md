@@ -15,7 +15,7 @@ tags:
 
 ```shell
 # -S  等同于 --save
-npm install commander -S
+node install commander -S
 ```
 
 ## 二、目录结构

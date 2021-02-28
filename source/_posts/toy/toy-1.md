@@ -12,7 +12,7 @@ tags: blog
 <!--more-->
 #### 一、安装
 ```bash
-npm install marked
+node install marked
 ```
 #### 二、用法
 一、基本用法
@@ -27,7 +27,7 @@ console.log(marked(src));
 二、代码块高亮
 1、安装`highlight.js`
 ```bash
-npm install highlight.js
+node install highlight.js
 ```
 2、用法
 
@@ -63,7 +63,7 @@ document.body.innerHTML = marked(data.post).replace(/<pre>/g, "<pre class='hljs'
 #### 一、安装`js-yaml`
 
 ```bash
-npm install js-yaml
+node install js-yaml
 ```
 
 #### 二、使用
