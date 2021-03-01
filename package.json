@@ -4,12 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test2": "echo \"Error: no test specified\" && exit 1",
-    "test": "node scripts/test",
-    "parse": "node scripts/index",
     "start": "webpack serve --open --config config/dev.js",
-    "build": "webpack --config config/prod.js",
-    "dev": "webpack serve"
+    "build": "webpack --config config/prod.js"
   },
   "repository": {
     "type": "git",

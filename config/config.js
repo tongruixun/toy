@@ -51,9 +51,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin( {
-            cleanOnceBeforeBuildPatterns: ['**/*', '!.git'],
-        }),
+        // new CleanWebpackPlugin( {
+        //     cleanOnceBeforeBuildPatterns: ['**/*', '!.git*'],
+        // }),
         new HtmlWebpackPlugin({
             template: "src/index.html",
         })

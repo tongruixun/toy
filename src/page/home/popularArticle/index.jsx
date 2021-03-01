@@ -1,4 +1,5 @@
 import React from 'react';
+import {AnTagsLink} from '@/components'
 import {formatDate} from "@/util/util";
 import styles from './index.less'
 import {Link} from "react-router-dom";
@@ -22,6 +23,7 @@ function PopularArticle({datasource}) {
                                 <strong>Article</strong>{` on ${formatDate(data.date, 'MMM,DD,YYYY')}`}
                             </time>
                             <h3><Link to={`/frontEnd/postDetail/${id}`}>{data.title}</Link></h3>
+                            <AnTagsLink tags={data.tags}/>
                         </article>
                     )
                 })

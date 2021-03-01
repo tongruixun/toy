@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {AnCard} from '@/components'
+import {AnCard, AnTagsLink} from '@/components'
 import {formatDate} from "@/util/util";
 import styles from "./index.less";
 function PostCard({postInfo, id}) {
@@ -24,7 +24,7 @@ function PostCard({postInfo, id}) {
                     <div className={styles.readMore}>
                         <Link to={`/frontEnd/postDetail/${id}`}>阅读全文...</Link>
                     </div>
-                    <div className={styles.tags}>标签:&ensp;{renderTags(tags)}</div>
+                    <AnTagsLink tags={tags}/>
                 </div>
             </div>
     </AnCard>

@@ -3,6 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import classNames from "classnames/bind";
 import {menu} from "@/config/config";
 import {debounce} from "@/util/util";
+import logo from "@/asset/logo.svg"
 import styles from "./index.less"
 import {AnSearch} from "@/components";
 
@@ -35,7 +36,7 @@ function NavBar() {
    return (
        <div className={cxBind({wrap: true, show})}>
            <div className={styles.header}>
-                有小鱼干么
+               <img src={logo}/> 有小鱼干么
            </div>
            <div className={styles.navBar}>
                <div className={styles.nav}>
