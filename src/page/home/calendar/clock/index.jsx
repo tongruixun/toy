@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
 import {renderTime} from "@/util/util";
 import styles from './index.less';
 
-const dayOfYear = require('dayjs/plugin/dayOfYear');
-dayjs.extend(dayOfYear)
-
-// 年周数
-const isoWeeksInYear = require('dayjs/plugin/isoWeeksInYear');
-const isLeapYear = require('dayjs/plugin/isLeapYear');
-dayjs.extend(isoWeeksInYear)
-dayjs.extend(isLeapYear)
-
-function Countdown() {
+function Clock() {
 
     const [curTime, setCurTime] = useState(() => renderTime());
 
@@ -32,4 +22,4 @@ function Countdown() {
     </div>
 }
 
-export default Countdown;
+export default Clock;
