@@ -11,10 +11,10 @@ function Home() {
     return <div className={styles.wrap}>
         <Calendar />
         <div className={styles.sideRight}>
+            <PopularArticle datasource={datasource}/>
             <div className={styles.section}>
                 <RecentArticle datasource={datasource}/>
             </div>
-            <PopularArticle datasource={datasource}/>
         </div>
     </div>
 }

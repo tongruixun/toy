@@ -53,34 +53,39 @@ export function renderTime() {
     return result
 }
 
-export function getRemainingDate() {
+export function getRemainingDate(newItems = []) {
 
     const moment = dayjs();
     const countdowns = [
         {
-            title: moment.add(1, 'year').format('YYYY 年'),
-            startDate: moment,
-            endDate: moment.endOf('year')
+            title: '周五',
+            endDate: moment.day(5)
         },{
             title: moment.add(1, 'month').format('MM 月'),
-            startDate: moment,
             endDate: moment.endOf('month')
         },{
-            title: '周五',
-            startDate: moment,
-            endDate: moment.day(5)
+            title: moment.add(1, 'year').format('YYYY 年'),
+            endDate: moment.endOf('year')
         }
     ]
 
-    return countdowns.map(item => getCountdown(item));
+    return [...countdowns, ...newItems].map(item => getCountdown(item, moment));
 }
 
-function getCountdown({title, startDate, endDate}) {
-    if(!(startDate instanceof dayjs)) startDate = dayjs(startDate);
-    if(!(endDate instanceof dayjs)) startDate = dayjs(endDate);
+function getCountdown({title, endDate}, start) {
+    if(!(endDate instanceof dayjs)) endDate = dayjs(endDate);
     const result = {};
     // 日期差异
-    result.remainingDaysInYear = endDate.diff(startDate, 'day');
+    result.remainingDays = endDate.diff(start, 'day');
+    result.unit = 'days';
+    if(result.remainingDays === 0) {
+        result.remainingDays = endDate.diff(start, 'hour');
+        result.unit = 'hours';
+    }
+    if(result.remainingDays < 0) {
+        result.remainingDays = '';
+        result.unit = 'TIMEOUT';
+    }
     result.title = title;
     result.endTime = {
         week: week[endDate.get('day')],

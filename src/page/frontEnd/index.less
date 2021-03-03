@@ -1,19 +1,17 @@
 .wrap {
+  display: flex;
   .head {
-    height: 48px;
     background-color: #ffffff;
-    margin-bottom: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    div {
-      margin: 0 24px;
+    flex: 0 0 256px;
+
+    header {
+      height: 256px;
     }
   }
   .contain {
     display: flex;
-    flex-wrap: wrap;
-    padding: 0 24px;
+    flex: 1;
+    padding: 88px 24px 0;
     .main {
       display: flex;
       justify-content: center;

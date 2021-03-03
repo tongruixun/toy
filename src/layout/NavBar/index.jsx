@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
 import classNames from "classnames/bind";
 import {menu} from "@/config/config";
 import {debounce} from "@/util/util";
@@ -36,7 +36,10 @@ function NavBar() {
    return (
        <div className={cxBind({wrap: true, show})}>
            <div className={styles.header}>
-               <img src={logo}/> 有小鱼干么
+               <Link to='/'>
+                   <img src={logo}/>
+               </Link>
+               有小鱼干么
            </div>
            <div className={styles.navBar}>
                <div className={styles.nav}>
