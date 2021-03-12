@@ -1,20 +1,18 @@
-import React, {useEffect} from 'react';
-import Sidebar from "./sidebar";
+import React from 'react';
 import styles from './index.less'
-import {NavLink} from "react-router-dom";
 import {config} from "@/db";
-import SubNav from "./subNav";
+import RainCanvas from "./components/RainCanvas";
+import Tags from './components/tags'
+import SubNav from "./components/subNav";
 
 function FrontEnd(props) {
 
     return (
         <div className={styles.wrap}>
             <div className={styles.head}>
-                <header></header>
-                <SubNav subNav={config.subNav} />
-                {/*<div>*/}
-                {/*    <NavLink activeClassName="selected" to='/frontEnd'>文章首页</NavLink>*/}
-                {/*</div>*/}
+                <RainCanvas />
+                <SubNav subNav={config.subNav}/>
+                <Tags />
             </div>
             <div className={styles.contain}>
                 <div className={styles.main}>
@@ -22,9 +20,9 @@ function FrontEnd(props) {
                         props.children
                     }
                 </div>
-                {/*<Sidebar />*/}
             </div>
         </div>
     )
 }
+
 export default FrontEnd;

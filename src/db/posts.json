@@ -1,6 +1,99 @@
 [
 	{
 		"data": {
+			"title": "WebStorm 常用快捷键",
+			"date": "2021-03-12T14:41:22.000Z",
+			"tags": "WebStorm"
+		},
+		"content": "<a id=\"一、文档编辑\"><h2>一、文档编辑</h2></a><ul>\n<li><a id=\"查看当前文件的结构\"><h5>查看当前文件的结构</h5></a><code>ctrl + F12</code></li>\n<li><a id=\"匹配 {} []\"><h5>匹配 {} []</h5></a><code>ctrl + ]/[</code></li>\n<li><a id=\"行移动\"><h5>行移动</h5></a><code>shift + alt + up</code></li>\n<li><a id=\"代码块移动\"><h5>代码块移动</h5></a><code>ctrl + shift + up</code></li>\n<li><a id=\"选中块代码\"><h5>选中块代码</h5></a><code>ctrl + shift + ]/[</code></li>\n<li><a id=\"查找文件\"><h5>查找文件</h5></a><code>ctrl + shift + n</code></li>\n<li><a id=\"替换\"><h5>替换</h5></a><code>ctrl + r</code></li>\n<li><a id=\"查找\"><h5>查找</h5></a><code>ctrl + f</code></li>\n<li><a id=\"快速打开或隐藏工程面板\"><h5>快速打开或隐藏工程面板</h5></a><code>alt + 1</code></li>\n<li><a id=\"删除行  同时进行复制\"><h5>删除行  同时进行复制</h5></a><code>ctrl + x</code></li>\n<li><a id=\"复制行\"><h5>复制行</h5></a><code>ctrl + d</code></li>\n<li><a id=\"切换代码视图窗口\"><h5>切换代码视图窗口</h5></a><code>alt + left/right</code></li>\n<li><a id=\"在方法中快速移动定位\"><h5>在方法中快速移动定位</h5></a><code>alt + up/down</code></li>\n<li><a id=\"选中代码,连续使用逐级向外选中\"><h5>选中代码,连续使用逐级向外选中</h5></a><code>ctrl + w</code></li>\n<li><a id=\"最近打开的文件\"><h5>最近打开的文件</h5></a><code>ctrl + e</code></li>\n<li><a id=\"围绕包裹选中的代码\"><h5>围绕包裹选中的代码</h5></a><code>ctrl + alt + t</code></li>\n<li><a id=\"折叠展开代码块 逐级折叠或逐级展开\"><h5>折叠展开代码块 逐级折叠或逐级展开</h5></a><code>ctrl + -/+</code></li>\n<li><a id=\"折叠展开当前代码块\"><h5>折叠展开当前代码块</h5></a><code>ctrl + .</code></li>\n<li><a id=\"单行注释\"><h5>单行注释</h5></a><code>ctrl + /</code></li>\n</ul>\n",
+		"separator": "---",
+		"prefixSeparator": true,
+		"directory": [
+			{
+				"label": "一、文档编辑",
+				"level": 2
+			},
+			{
+				"label": "查看当前文件的结构",
+				"level": 5
+			},
+			{
+				"label": "匹配 {} []",
+				"level": 5
+			},
+			{
+				"label": "行移动",
+				"level": 5
+			},
+			{
+				"label": "代码块移动",
+				"level": 5
+			},
+			{
+				"label": "选中块代码",
+				"level": 5
+			},
+			{
+				"label": "查找文件",
+				"level": 5
+			},
+			{
+				"label": "替换",
+				"level": 5
+			},
+			{
+				"label": "查找",
+				"level": 5
+			},
+			{
+				"label": "快速打开或隐藏工程面板",
+				"level": 5
+			},
+			{
+				"label": "删除行  同时进行复制",
+				"level": 5
+			},
+			{
+				"label": "复制行",
+				"level": 5
+			},
+			{
+				"label": "切换代码视图窗口",
+				"level": 5
+			},
+			{
+				"label": "在方法中快速移动定位",
+				"level": 5
+			},
+			{
+				"label": "选中代码,连续使用逐级向外选中",
+				"level": 5
+			},
+			{
+				"label": "最近打开的文件",
+				"level": 5
+			},
+			{
+				"label": "围绕包裹选中的代码",
+				"level": 5
+			},
+			{
+				"label": "折叠展开代码块 逐级折叠或逐级展开",
+				"level": 5
+			},
+			{
+				"label": "折叠展开当前代码块",
+				"level": 5
+			},
+			{
+				"label": "单行注释",
+				"level": 5
+			}
+		],
+		"id": 1615560082
+	},
+	{
+		"data": {
 			"title": "nginx(一)",
 			"date": "2021-03-08T17:19:17.000Z",
 			"tags": "nginx"

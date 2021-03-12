@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {themes} from "@/db";
-import PostCard from "@/page/frontEnd/postCard";
+import PostCard from "@/page/frontEnd/overview/postCard";
 import {AnPagination} from "@/components"
 import styles from "./index.less";
 
