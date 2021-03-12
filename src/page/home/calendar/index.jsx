@@ -7,6 +7,8 @@ import Clock from "./clock";
 import styles from './index.less'
 
 const newItems = [{title: '示例', endDate: '2021-3-4'}];
+
+
 function Calendar() {
 
     const [curTime, setCurTime] = useState(() => renderTime());
@@ -20,10 +22,11 @@ function Calendar() {
         return () => clearInterval(timer);
     }, [])
 
-    return <div className={styles.calendar} >
-                <Clock curTime={curTime}/>
-                <Countdown countdowns={countdowns}/>
-        </div>
+    return <div className={styles.calendar}>
+        <div className={styles.heartWrap} />
+        <Clock curTime={curTime}/>
+        <Countdown countdowns={countdowns}/>
+    </div>
 }
 
 export default Calendar;

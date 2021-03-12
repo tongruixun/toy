@@ -1,6 +1,23 @@
 [
 	{
 		"data": {
+			"title": "nginx(一)",
+			"date": "2021-03-08T17:19:17.000Z",
+			"tags": "nginx"
+		},
+		"content": "<a id=\"一、基本命令\"><h2>一、基本命令</h2></a><pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-meta\"># 启动</span>\nnginx\n\n<span class=\"hljs-meta\"># 重启</span>\nnginx -s reload\n\n<span class=\"hljs-meta\"># 查看进程号</span>\nps -ef |grep nginx\n\n<span class=\"hljs-meta\"># nginx 服务停止</span>\nnginx -s stop\n</code></pre>\n",
+		"separator": "---",
+		"prefixSeparator": true,
+		"directory": [
+			{
+				"label": "一、基本命令",
+				"level": 2
+			}
+		],
+		"id": 1615223957
+	},
+	{
+		"data": {
 			"title": "git(二) 子仓库",
 			"date": "2021-03-02T08:36:31.000Z",
 			"tags": "git"
