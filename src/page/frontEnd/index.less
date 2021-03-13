@@ -1,25 +1,44 @@
 .wrap {
   display: flex;
 
-  .head {
-    background-color: #ffffff;
+  .sidebar {
     flex: 0 0 256px;
-    padding-top: 84px;
-    text-align: center;
+    background-color: #ffffff;
+    .head {
+      text-align: center;
+      background-color: #495c69;
+      margin-bottom: 64px;
+
+      .headLink {
+        font-size: 24px;
+        line-height: 64px;
+        padding-left: 64px;
+        position: relative;
+        color: #ffffff;
+
+        img {
+          width: 32px;
+          position: absolute;
+          left: 20px;
+          top: 18px;
+        }
+      }
+    }
   }
 
   .contain {
     display: flex;
     flex: 1;
-    padding: 88px 24px 24px;
+    padding: 48px 24px 24px;
+    height: calc(100vh - 72px);
+    overflow: auto;
 
     .main {
-      min-height: calc(100vh - 88px);
       display: flex;
       justify-content: center;
-      background-color: #ffffff;
-      margin-right: 24px;
       flex: 1;
+      background-color: #ffffff;
+      align-self: start;
     }
   }
 }

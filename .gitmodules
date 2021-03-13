@@ -1,3 +1,3 @@
 [submodule "public"]
 	path = public
-	url = git@github.com:tongruixun/tongruixun.github.io.git
+	url = https://gitee.com/tongruixun/toy-blog.git

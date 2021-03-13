@@ -13,7 +13,7 @@ categories: 博客搭建
 npm install --save hexo-helper-live2d
 ```
 
-## 二·、下载模型
+## 二、下载模型
 
 
 使用 `npm install {packagename}` 安装模型

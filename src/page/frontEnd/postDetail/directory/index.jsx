@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import classNames from "classnames/bind";
 import styles from './index.less'
 
@@ -7,38 +7,10 @@ const cxBind = classNames.bind(styles);
 function Directory(props) {
 
     const [curNav, setCurNav] = useState('');
-    const [navList, setNavList] = useState([]);
-    const [fixed, setFixed] = useState(false);
-
-    const listenScrollTop = () => {
-        setFixed(document.documentElement.scrollTop > 112);
-    }
+    const [bool, setBool] = useState('');
 
     useEffect(() => {
-
-        window.addEventListener('scroll', listenScrollTop);
-        const {dirList} = props;
-        let firstLevel = [];
-        // 只显示一级标题
-        dirList.forEach(item => {
-            if (firstLevel.length === 0) {
-                firstLevel.push(item);
-            } else {
-                const lastItem = firstLevel[firstLevel.length - 1];
-                if(lastItem.level === item.level) {
-                    firstLevel.push(item);
-                }
-                if (lastItem.level > item.level) {
-                    firstLevel = [item];
-                }
-            }
-        })
-        setCurNav(firstLevel[0].label)
-        setNavList(firstLevel);
-
-        return () => {
-            window.removeEventListener('scroll', listenScrollTop)
-        }
+        setCurNav(props.dirList[0].label)
     }, [])
 
 
@@ -48,16 +20,38 @@ function Directory(props) {
             // 找到锚点
             let anchorElement = document.getElementById(anchorName);
             // 如果对应id的锚点存在，就跳转到锚点
-            if(anchorElement) { anchorElement.scrollIntoView({block: "start", behavior: "smooth"}); }
+            if (anchorElement) {
+                anchorElement.scrollIntoView({block: "start", behavior: "smooth"});
+            }
         }
     }
 
-    return <div className={cxBind({directoryUl: true, fixed})}>
-        {
-            navList.map(({label}, index) => {
-                return <div className={cxBind({directoryLi: true, isActive: curNav === label})} key={index} onClick={() => scrollToAnchor(label)}>{label}</div>
-            })
-        }
+    return <div className={styles.wrap}>
+        <div className={styles.directoryUl} onClick={() => {
+            if (bool === '' || bool === 'hidden') {
+                setBool('active')
+            }
+            if (bool === 'active') {
+                setBool('hidden')
+            }
+
+        }}>
+            <span className='iconfont icon-gengduo'/>
+        </div>
+        <div className={cxBind({directoryWrapper: true, hidden: bool === 'hidden', active: bool === 'active'})}>
+            {
+                props.dirList.map(({label, level}, index) => {
+                    return <div
+                        className={cxBind({directoryLi: true, isActive: curNav === label})}
+                        onClick={() => scrollToAnchor(label)}
+                        key={index}
+                        style={{fontSize: 20 - level * 2, paddingLeft: 10 * level}}
+                    >
+                        {label}
+                    </div>
+                })
+            }
+        </div>
     </div>
 }
 

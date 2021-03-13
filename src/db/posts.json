@@ -1,6 +1,43 @@
 [
 	{
 		"data": {
+			"title": "markdown语法",
+			"date": "2021-03-13T12:59:59.000Z",
+			"tags": "markdown"
+		},
+		"content": "<a id=\"h1\"><h1>h1</h1></a><a id=\"h2\"><h2>h2</h2></a><a id=\"h3\"><h3>h3</h3></a><a id=\"h4\"><h4>h4</h4></a><a id=\"h5\"><h5>h5</h5></a><a id=\"h6\"><h6>h6</h6></a><blockquote>\n单行引用</blockquote>\n<blockquote>\n多行yin用<blockquote>\n缩进一<blockquote>\n缩进二</blockquote>\n</blockquote>\n</blockquote>\n<del>删除线</del>  <em>斜体</em>  <strong>粗体</strong>  <strong>粗体</strong>  <strong><em>斜粗体</em></strong> <strong><em>斜粗体</em></strong>  上标<sup>2</sup> 下标<sub>2</sub><font face=\"黑体\">黑体</font><br/><font face=\"微软雅黑\">我是微软雅黑</font><br/><font face=\"STCAIYUN\">我是华文彩云</font><br/><font color=red>我是红色</font><br/><font color=#008000>我是绿色</font><br/><font color=Blue>我是蓝色</font><br/><font size=5>尺寸5</font><table>\n<thead>\n<tr>\n<th>表头</th>\n<th>表头</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>单元格</td>\n<td>单元格</td>\n</tr>\n<tr>\n<td>单元格</td>\n<td>单元格</td>\n</tr>\n</tbody></table>\n<code>行内代码</code><pre class='hljs'><code>代码块\n<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span> </span>{\n    <span class=\"hljs-keyword\">do</span> something...\n}\n</code></pre>\n<ul>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> already subject1<ul>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> already subject1.1</li>\n<li><input checked=\"\" disabled=\"\" type=\"checkbox\"> already subject1.2</li>\n</ul>\n</li>\n<li><input disabled=\"\" type=\"checkbox\"> already subject2</li>\n</ul>\n",
+		"separator": "---",
+		"prefixSeparator": true,
+		"directory": [
+			{
+				"label": "h1",
+				"level": 1
+			},
+			{
+				"label": "h2",
+				"level": 2
+			},
+			{
+				"label": "h3",
+				"level": 3
+			},
+			{
+				"label": "h4",
+				"level": 4
+			},
+			{
+				"label": "h5",
+				"level": 5
+			},
+			{
+				"label": "h6",
+				"level": 6
+			}
+		],
+		"id": 1615640399
+	},
+	{
+		"data": {
 			"title": "WebStorm 常用快捷键",
 			"date": "2021-03-12T14:41:22.000Z",
 			"tags": "WebStorm"
@@ -115,7 +152,7 @@
 			"date": "2021-03-02T08:36:31.000Z",
 			"tags": "git"
 		},
-		"content": "<a id=\"一、什么是git子仓库\"><h2>一、什么是git子仓库</h2></a>通俗上的理解, 一个Git仓库下面放了多个其他的Git仓库,其他的Git仓库就是我们父级仓库的子仓库。<a id=\"Git子仓库的两种使用方案\"><h4>Git子仓库的两种使用方案</h4></a><ul>\n<li>1、<code>git submodule</code></li>\n<li>2、<code>git subtree</code></li>\n</ul>\n<a id=\"二、git submodule(子模块)用法\"><h2>二、git submodule(子模块)用法</h2></a><a id=\"一、使用git submodule(子模块)在父仓库中添加子仓库\"><h4>一、使用git submodule(子模块)在父仓库中添加子仓库</h4></a><pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-comment\"># Add a submodule</span>\n<span class=\"hljs-comment\"># &lt;url&gt; git 子仓库的地址</span>\n<span class=\"hljs-comment\"># &lt;path&gt; 本地目录</span>\ngit submodule add <span class=\"hljs-variable\">&lt;url&gt;</span> <span class=\"hljs-variable\">&lt;path&gt;</span>\n</code></pre>\n<a id=\"二、对子仓库进行pull, push\"><h4>二、对子仓库进行pull, push</h4></a><a id=\"一、使用git submodule foreach\"><h5>一、使用<code>git submodule foreach</code></h5></a>如果觉得对每个子仓库进行提交繁琐的话,<code>git submodule foreach</code>就可以解决你这个烦恼<pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-meta\"># 主仓库目录下   foreach 后面的git命令就是你对子模块的操作</span>\n<span class=\"hljs-meta\"># 对所有子仓库拉取一次最新代码</span>\ngit submodule <span class=\"hljs-keyword\">foreach</span> git pull\n</code></pre>\n<a id=\"二、进入对应仓库目录使用git命令进行操作\"><h5>二、进入对应仓库目录使用git命令进行操作</h5></a><a id=\"二、克隆含有子仓库的仓库的两中方式\"><h4>二、克隆含有子仓库的仓库的两中方式</h4></a><a id=\"一、方式一\"><h4>一、方式一</h4></a><pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-comment\"># Git会自动帮我们递归去拉取我们所有的父仓库和子仓库的相关内容。</span>\ngit <span class=\"hljs-keyword\">clone</span> <span class=\"hljs-title\">--recursive</span> git@github.com:tongruixun/toy.git\n</code></pre>\n<a id=\"二、方式二\"><h5>二、方式二</h5></a>首先执行<code>git submodule init</code>用来初始化本地配置文件,也就是向.git/config文件中写入了子模块的信息。<br/><code>git submodule update</code>则是从子仓库中抓取所有的数据找到父级仓库对应的那次子仓库的提交id并且检出到父项目的目录中。<br/>然后查看仓库下的目录结构，此时和提交的目录结构保持一致<pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-meta\"># 克隆父仓库 此时并不会克隆子仓库 仓库中虽然有子仓库文件夹，但文件夹里面是空的。</span>\n<span class=\"hljs-meta\"># 需要运行git submodule的另外两个命令</span>\ngit clone git@github.com:tongruixun/toy.git\n\n<span class=\"hljs-meta\"># 初始化本地配置文件</span>\ngit submodule init\n\n<span class=\"hljs-meta\"># </span>\ngit submodule update\n</code></pre>\n<a id=\"参考链接\"><h2>参考链接</h2></a><blockquote>\n<a href=\"https://zhuanlan.zhihu.com/p/100214931\">https://zhuanlan.zhihu.com/p/100214931</a></blockquote>\n",
+		"content": "<a id=\"一、什么是git子仓库\"><h2>一、什么是git子仓库</h2></a>通俗上的理解, 一个Git仓库下面放了多个其他的Git仓库,其他的Git仓库就是我们父级仓库的子仓库。<a id=\"Git子仓库的两种使用方案\"><h4>Git子仓库的两种使用方案</h4></a><ul>\n<li>1、<code>git submodule</code></li>\n<li>2、<code>git subtree</code></li>\n</ul>\n<a id=\"二、git submodule(子模块)用法\"><h2>二、git submodule(子模块)用法</h2></a><a id=\"一、使用git submodule(子模块)在父仓库中添加子仓库\"><h4>一、使用git submodule(子模块)在父仓库中添加子仓库</h4></a><pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-comment\"># Add a submodule</span>\n<span class=\"hljs-comment\"># &lt;url&gt; git 子仓库的地址</span>\n<span class=\"hljs-comment\"># &lt;path&gt; 本地目录</span>\ngit submodule add <span class=\"hljs-variable\">&lt;url&gt;</span> <span class=\"hljs-variable\">&lt;path&gt;</span>\n</code></pre>\n<a id=\"二、对子仓库进行pull, push\"><h4>二、对子仓库进行pull, push</h4></a><a id=\"1、在府项目的目录下直接使用git submodule foreach\"><h5>1、在府项目的目录下直接使用<code>git submodule foreach</code></h5></a>如果觉得对每个子仓库进行提交繁琐的话,<code>git submodule foreach</code>就可以解决你这个烦恼<pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-meta\"># 主仓库目录下   foreach 后面的git命令就是你对子模块的操作</span>\n<span class=\"hljs-meta\"># 对所有子仓库拉取一次最新代码</span>\ngit submodule <span class=\"hljs-keyword\">foreach</span> git pull\n</code></pre>\n<a id=\"2、进入submodule使用git命令进行操作\"><h5>2、进入submodule使用git命令进行操作</h5></a><a id=\"三、克隆含有子仓库的仓库的两种方式\"><h4>三、克隆含有子仓库的仓库的两种方式</h4></a><a id=\"1、方式一\"><h5>1、方式一</h5></a><pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-comment\"># Git会自动帮我们递归去拉取我们所有的父仓库和子仓库的相关内容。</span>\ngit <span class=\"hljs-keyword\">clone</span> <span class=\"hljs-title\">--recursive</span> git@github.com:tongruixun/toy.git\n</code></pre>\n<a id=\"2、方式二\"><h5>2、方式二</h5></a>首先执行<code>git submodule init</code>用来初始化本地配置文件,也就是向.git/config文件中写入了子模块的信息。<br/><code>git submodule update</code>则是从子仓库中抓取所有的数据找到父级仓库对应的那次子仓库的提交id并且检出到父项目的目录中。<br/>然后查看仓库下的目录结构，此时和提交的目录结构保持一致<pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-meta\"># 克隆父仓库 此时并不会克隆子仓库 仓库中虽然有子仓库文件夹，但文件夹里面是空的。</span>\n<span class=\"hljs-meta\"># 需要运行git submodule的另外两个命令</span>\ngit clone git@github.com:tongruixun/toy.git\n\n<span class=\"hljs-meta\"># 初始化本地配置文件</span>\ngit submodule init\n\n<span class=\"hljs-meta\"># </span>\ngit submodule update\n</code></pre>\n<a id=\"四、删除submodule\"><h4>四、删除submodule</h4></a>git 不支持直接删除submodule需要手动删除对应的文件<br/>进入项目根目录<pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-comment\"># 1、进入项目根目录</span>\ngit <span class=\"hljs-built_in\">rm</span> -<span class=\"hljs-literal\">-cached</span> 子仓库文件名\n\n<span class=\"hljs-comment\"># 2、手动删除相关文件</span>\n\n<span class=\"hljs-built_in\">rm</span> <span class=\"hljs-literal\">-rf</span> 子仓库文件名\n<span class=\"hljs-built_in\">rm</span> .gitmodules\n\n<span class=\"hljs-comment\"># 3、进入 .git/module 删除对应文件</span>\n</code></pre>\n<a id=\"参考链接\"><h2>参考链接</h2></a><blockquote>\n<a href=\"https://zhuanlan.zhihu.com/p/100214931\">https://zhuanlan.zhihu.com/p/100214931</a></blockquote>\n",
 		"separator": "---",
 		"prefixSeparator": true,
 		"directory": [
@@ -140,24 +177,28 @@
 				"level": 4
 			},
 			{
-				"label": "一、使用git submodule foreach",
+				"label": "1、在府项目的目录下直接使用git submodule foreach",
 				"level": 5
 			},
 			{
-				"label": "二、进入对应仓库目录使用git命令进行操作",
+				"label": "2、进入submodule使用git命令进行操作",
 				"level": 5
 			},
 			{
-				"label": "二、克隆含有子仓库的仓库的两中方式",
+				"label": "三、克隆含有子仓库的仓库的两种方式",
 				"level": 4
 			},
 			{
-				"label": "一、方式一",
-				"level": 4
+				"label": "1、方式一",
+				"level": 5
 			},
 			{
-				"label": "二、方式二",
+				"label": "2、方式二",
 				"level": 5
+			},
+			{
+				"label": "四、删除submodule",
+				"level": 4
 			},
 			{
 				"label": "参考链接",
@@ -645,7 +686,7 @@
 			"tags": "hexo",
 			"categories": "博客搭建"
 		},
-		"content": "<meta name=\"referrer\" content=\"no-referrer\" />\n\n<a id=\"一、安装模块\"><h2>一、安装模块</h2></a><pre class='hljs'><code>npm install <span class=\"hljs-comment\">--save hexo-helper-live2d</span>\n</code></pre>\n<a id=\"二·、下载模型\"><h2>二·、下载模型</h2></a>使用 <code>npm install {packagename}</code> 安装模型<pre class='hljs'><code><span class=\"hljs-regexp\">//</span> hijiki 一只黑色小猫\nnpm install live2d-widget-model-hijiki\n</code></pre>\n模型仓库<blockquote>\n<a href=\"https://github.com/xiazeyu/live2d-widget-models\">https://github.com/xiazeyu/live2d-widget-models</a></blockquote>\n<!--more-->\n<a id=\"三、添加配置\"><h2>三、添加配置</h2></a><a id=\"在hexo的根目录下的_config.yml中添加下面的内容\"><h4>在hexo的根目录下的<code>_config.yml</code>中添加下面的内容</h4></a><pre class='hljs'><code class=\"language-yml\">\n<span class=\"hljs-meta\"># Live2D</span>\n<span class=\"hljs-meta\">## https:<span class=\"hljs-comment\">//github.com/EYHN/hexo-helper-live2d</span></span>\n<span class=\"hljs-meta\">## https:<span class=\"hljs-comment\">//l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init</span></span>\n<span class=\"hljs-symbol\">live2d:</span>\n<span class=\"hljs-symbol\">  enable:</span> true\n  <span class=\"hljs-meta\">#enable: false</span>\n<span class=\"hljs-symbol\">  scriptFrom:</span> local <span class=\"hljs-meta\"># 默认</span>\n<span class=\"hljs-symbol\">  pluginRootPath:</span> live2dw/ <span class=\"hljs-meta\"># 插件在站点上的根目录(相对路径)</span>\n<span class=\"hljs-symbol\">  pluginJsPath:</span> lib/ <span class=\"hljs-meta\"># 脚本文件相对与插件根目录路径</span>\n<span class=\"hljs-symbol\">  pluginModelPath:</span> assets/ <span class=\"hljs-meta\"># 模型文件相对与插件根目录路径</span>\n  <span class=\"hljs-meta\"># scriptFrom: jsdelivr # jsdelivr CDN</span>\n  <span class=\"hljs-meta\"># scriptFrom: unpkg # unpkg CDN</span>\n  <span class=\"hljs-meta\"># scriptFrom: https:<span class=\"hljs-comment\">//cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js # 你的自定义 url</span></span>\n<span class=\"hljs-symbol\">  tagMode:</span> false <span class=\"hljs-meta\"># 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中</span>\n<span class=\"hljs-symbol\">  debug:</span> false <span class=\"hljs-meta\"># 调试, 是否在控制台输出日志</span>\n<span class=\"hljs-symbol\">  model:</span>\n<span class=\"hljs-symbol\">    use:</span> live2d-widget-model-hijiki\n    <span class=\"hljs-meta\"># use: live2d-widget-model-wanko # node-module package name</span>\n    <span class=\"hljs-meta\"># use: wanko # 博客根目录/live2d_models/ 下的目录名</span>\n    <span class=\"hljs-meta\"># use: ./wives/wanko # 相对于博客根目录的路径</span>\n    <span class=\"hljs-meta\"># use: https:<span class=\"hljs-comment\">//cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url</span></span>\n<span class=\"hljs-symbol\">  display:</span>\n<span class=\"hljs-symbol\">    position:</span> right\n<span class=\"hljs-symbol\">    width:</span> <span class=\"hljs-number\">145</span>\n<span class=\"hljs-symbol\">    height:</span> <span class=\"hljs-number\">315</span>\n<span class=\"hljs-symbol\">  mobile:</span>\n<span class=\"hljs-symbol\">    show:</span> true <span class=\"hljs-meta\"># 是否在移动设备上显示</span>\n<span class=\"hljs-symbol\">    scale:</span> <span class=\"hljs-number\">0.5</span> <span class=\"hljs-meta\"># 移动设备上的缩放       </span>\n<span class=\"hljs-symbol\">  react:</span>\n<span class=\"hljs-symbol\">    opacityDefault:</span> <span class=\"hljs-number\">0.7</span>\n<span class=\"hljs-symbol\">    opacityOnHover:</span> <span class=\"hljs-number\">0.8</span>\n</code></pre>\n<a id=\"四、部分模型展示\"><h2>四、部分模型展示</h2></a>Epsilon<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/51hexo.png\" alt=\"\">shizuku<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/53hexo.png\" alt=\"\">z16<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/56hexo.png\" alt=\"\">hibiki<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/57hexo.png\" alt=\"\">koharu<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/58hexo.png\" alt=\"\">hijiki<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/ia_100000062.gif\" alt=\"\">",
+		"content": "<meta name=\"referrer\" content=\"no-referrer\" />\n\n<a id=\"一、安装模块\"><h2>一、安装模块</h2></a><pre class='hljs'><code>npm install <span class=\"hljs-comment\">--save hexo-helper-live2d</span>\n</code></pre>\n<a id=\"二、下载模型\"><h2>二、下载模型</h2></a>使用 <code>npm install {packagename}</code> 安装模型<pre class='hljs'><code><span class=\"hljs-regexp\">//</span> hijiki 一只黑色小猫\nnpm install live2d-widget-model-hijiki\n</code></pre>\n模型仓库<blockquote>\n<a href=\"https://github.com/xiazeyu/live2d-widget-models\">https://github.com/xiazeyu/live2d-widget-models</a></blockquote>\n<!--more-->\n<a id=\"三、添加配置\"><h2>三、添加配置</h2></a><a id=\"在hexo的根目录下的_config.yml中添加下面的内容\"><h4>在hexo的根目录下的<code>_config.yml</code>中添加下面的内容</h4></a><pre class='hljs'><code class=\"language-yml\">\n<span class=\"hljs-meta\"># Live2D</span>\n<span class=\"hljs-meta\">## https:<span class=\"hljs-comment\">//github.com/EYHN/hexo-helper-live2d</span></span>\n<span class=\"hljs-meta\">## https:<span class=\"hljs-comment\">//l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init</span></span>\n<span class=\"hljs-symbol\">live2d:</span>\n<span class=\"hljs-symbol\">  enable:</span> true\n  <span class=\"hljs-meta\">#enable: false</span>\n<span class=\"hljs-symbol\">  scriptFrom:</span> local <span class=\"hljs-meta\"># 默认</span>\n<span class=\"hljs-symbol\">  pluginRootPath:</span> live2dw/ <span class=\"hljs-meta\"># 插件在站点上的根目录(相对路径)</span>\n<span class=\"hljs-symbol\">  pluginJsPath:</span> lib/ <span class=\"hljs-meta\"># 脚本文件相对与插件根目录路径</span>\n<span class=\"hljs-symbol\">  pluginModelPath:</span> assets/ <span class=\"hljs-meta\"># 模型文件相对与插件根目录路径</span>\n  <span class=\"hljs-meta\"># scriptFrom: jsdelivr # jsdelivr CDN</span>\n  <span class=\"hljs-meta\"># scriptFrom: unpkg # unpkg CDN</span>\n  <span class=\"hljs-meta\"># scriptFrom: https:<span class=\"hljs-comment\">//cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js # 你的自定义 url</span></span>\n<span class=\"hljs-symbol\">  tagMode:</span> false <span class=\"hljs-meta\"># 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中</span>\n<span class=\"hljs-symbol\">  debug:</span> false <span class=\"hljs-meta\"># 调试, 是否在控制台输出日志</span>\n<span class=\"hljs-symbol\">  model:</span>\n<span class=\"hljs-symbol\">    use:</span> live2d-widget-model-hijiki\n    <span class=\"hljs-meta\"># use: live2d-widget-model-wanko # node-module package name</span>\n    <span class=\"hljs-meta\"># use: wanko # 博客根目录/live2d_models/ 下的目录名</span>\n    <span class=\"hljs-meta\"># use: ./wives/wanko # 相对于博客根目录的路径</span>\n    <span class=\"hljs-meta\"># use: https:<span class=\"hljs-comment\">//cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url</span></span>\n<span class=\"hljs-symbol\">  display:</span>\n<span class=\"hljs-symbol\">    position:</span> right\n<span class=\"hljs-symbol\">    width:</span> <span class=\"hljs-number\">145</span>\n<span class=\"hljs-symbol\">    height:</span> <span class=\"hljs-number\">315</span>\n<span class=\"hljs-symbol\">  mobile:</span>\n<span class=\"hljs-symbol\">    show:</span> true <span class=\"hljs-meta\"># 是否在移动设备上显示</span>\n<span class=\"hljs-symbol\">    scale:</span> <span class=\"hljs-number\">0.5</span> <span class=\"hljs-meta\"># 移动设备上的缩放       </span>\n<span class=\"hljs-symbol\">  react:</span>\n<span class=\"hljs-symbol\">    opacityDefault:</span> <span class=\"hljs-number\">0.7</span>\n<span class=\"hljs-symbol\">    opacityOnHover:</span> <span class=\"hljs-number\">0.8</span>\n</code></pre>\n<a id=\"四、部分模型展示\"><h2>四、部分模型展示</h2></a>Epsilon<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/51hexo.png\" alt=\"\">shizuku<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/53hexo.png\" alt=\"\">z16<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/56hexo.png\" alt=\"\">hibiki<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/57hexo.png\" alt=\"\">koharu<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/58hexo.png\" alt=\"\">hijiki<br/><img src=\"https://gitee.com/tongruixun/trx-imgs/raw/master/hexo/live2d-widget-model/ia_100000062.gif\" alt=\"\">",
 		"separator": "---",
 		"prefixSeparator": true,
 		"directory": [
@@ -654,7 +695,7 @@
 				"level": 2
 			},
 			{
-				"label": "二·、下载模型",
+				"label": "二、下载模型",
 				"level": 2
 			},
 			{
