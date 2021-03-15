@@ -27,7 +27,7 @@ function Directory(props) {
     }
 
     return <div className={styles.wrap}>
-        <div className={styles.directoryUl} onClick={() => {
+        <div title='目录' className={styles.directoryUl} onClick={() => {
             if (bool === '' || bool === 'hidden') {
                 setBool('active')
             }

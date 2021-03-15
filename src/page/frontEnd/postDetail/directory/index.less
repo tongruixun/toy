@@ -1,7 +1,7 @@
 .wrap {
   position: fixed;
   right: 68px;
-  bottom: 48px;
+  bottom: 128px;
   z-index: 999;
 
   .directoryUl {
@@ -22,7 +22,7 @@
     position: absolute;
     font-size: 14px;
     text-align: left;
-    right: 50px;
+    right: 0;
     bottom: 200px;
     background-color: #ffffff;
     transform:scale(0);
@@ -41,6 +41,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       cursor: pointer;
+      width: 256px;
 
       &:hover {
         color: #34538b;
@@ -75,9 +76,12 @@
       transform:translateY(0) rotate(0deg);
       opacity:1;
     }
-    100% {
-      transform:translateY(300px) rotate(45deg);
+    99.9% {
+      transform:translateY(600px) rotate(45deg);
       opacity:0;
+    }
+    100% {
+      transform:scale(0);
     }
   }
 }

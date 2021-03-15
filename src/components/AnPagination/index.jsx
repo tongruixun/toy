@@ -6,24 +6,25 @@ function AnPagination(props) {
     return (
         <div className={(styles.pagination)}>
             {
-                total? <>
+                total ? <div>
                     <div className={styles.pageIcon}>
                         {
                             current > 1 && <>
-                                <span onClick={()=>onChange(1)} className='iconfont icon-diyibu'/>
-                                <span onClick={()=>onChange(current - 1)} className='iconfont icon-shangyibu'/>
+                                <span onClick={() => onChange(1)} className='iconfont icon-diyibu'/>
+                                <span onClick={() => onChange(current - 1)} className='iconfont icon-shangyibu'/>
                             </>
                         }
                     </div>
                     <div className={styles.pageIcon}>
                         {
-                            current <  parseInt(total/10, 10) + 1 && <>
-                                <span onClick={()=>onChange(current + 1)} className='iconfont icon-xiayibu'/>
-                                <span onClick={()=>onChange(parseInt(total/10, 10) + 1)} className='iconfont icon-zuihouyibu'/>
+                            current < parseInt(total / 10, 10) + 1 && <>
+                                <span onClick={() => onChange(current + 1)} className='iconfont icon-xiayibu'/>
+                                <span onClick={() => onChange(parseInt(total / 10, 10) + 1)}
+                                      className='iconfont icon-zuihouyibu'/>
                             </>
                         }
                     </div>
-                </> : null
+                </div> : null
             }
         </div>
     )

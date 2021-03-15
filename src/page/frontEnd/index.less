@@ -1,9 +1,11 @@
+@bgColor: #e4dfd7;
+
 .wrap {
   display: flex;
 
   .sidebar {
     flex: 0 0 256px;
-    background-color: #ffffff;
+    background-color: @bgColor;
     .head {
       text-align: center;
       background-color: #495c69;
@@ -24,21 +26,31 @@
         }
       }
     }
+    .sidebarContain {
+      text-align: center;
+
+      .pageLink {
+        font-size: 20px;
+        color: #fc8c23;
+      }
+    }
   }
 
   .contain {
     display: flex;
     flex: 1;
-    padding: 48px 24px 24px;
-    height: calc(100vh - 72px);
+    padding: 24px;
+    height: calc(100vh - 48px);
     overflow: auto;
+    box-shadow: 0 5px 10px 0 rgba(146,146,146,.1);
 
     .main {
       display: flex;
       justify-content: center;
       flex: 1;
-      background-color: #ffffff;
+      background-color: @bgColor;
       align-self: start;
+      min-height: 100%;
     }
   }
 }
