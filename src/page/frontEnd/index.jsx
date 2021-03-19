@@ -22,7 +22,8 @@ function Sidebar() {
             </div>
             <div className={styles.sidebarContain}>
                 <div className={styles.pageLink}>
-                    <Link to='/'>主页</Link>/
+                    <Link to='/'>首页</Link>/
+                    <Link to='/frontEnd'>主页</Link>/
                     <Link to='/about'>关于</Link>/
                     <Link to='/'>相册</Link>
                 </div>

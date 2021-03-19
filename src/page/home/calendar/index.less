@@ -22,10 +22,6 @@
     cursor: pointer;
     transition: opacity 2s;
 
-    &:hover {
-      opacity: 1;
-    }
-
     &:before {
       content: '';
       position: absolute;
@@ -44,6 +40,12 @@
       height: 40px;
       transform: translateY(-40px);
       border-radius: 50% 50% 0 0 ;
+    }
+  }
+
+  &:hover {
+    .heartWrap {
+      opacity: 0.9;
     }
   }
 

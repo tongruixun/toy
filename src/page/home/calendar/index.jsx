@@ -23,7 +23,7 @@ function Calendar() {
     }, [])
 
     return <div className={styles.calendar}>
-        <div className={styles.heartWrap} />
+        <div className={styles.heartWrap}/>
         <Clock curTime={curTime}/>
         <Countdown countdowns={countdowns}/>
     </div>
