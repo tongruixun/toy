@@ -10,7 +10,7 @@ function Directory(props) {
     const [bool, setBool] = useState('');
 
     useEffect(() => {
-        setCurNav(props.dirList[0].label)
+        setCurNav(props.dirList[0]?.label)
     }, [])
 
 

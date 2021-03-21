@@ -101,5 +101,19 @@ useEffect(() => {
     }
 ```
 
+## 四、给地图添加数据
+默认是 'name'，针对 GeoJSON 要素的自定义属性名称，作为主键用于关联数据点和 GeoJSON 地理要素。
+可以通过`nameProperty`属性进行自定义
+```
+{
+    nameProperty: 'NAME', // 数据点中的 name：Alabama 会关联到 GeoJSON 中 NAME 属性值为 Alabama 的地理要素{"type":"Feature","id":"01","properties":{"NAME":"Alabama"}, "geometry": { ... }}
+    data:[
+        {name: 'Alabama', value: 4822023},
+        {name: 'Alaska', value: 731449},
+    ]
+}
+```
+
+
 ## Echarts API 地址
 > https://echarts.apache.org/zh/option.html#series-scatter.data.label.rich

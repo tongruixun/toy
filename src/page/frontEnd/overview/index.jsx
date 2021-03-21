@@ -15,22 +15,24 @@ import img7 from "@/asset/img/card/art-7.jpg"
 import img8 from "@/asset/img/card/art-8.jpg"
 import img9 from "@/asset/img/card/art-9.jpg"
 import img10 from "@/asset/img/card/art-10.jpg"
+import nature1 from "@/asset/img/card/nature1.jpg"
+import nature2 from "@/asset/img/card/nature2.jpg"
+import nature3 from "@/asset/img/card/nature3.jpg"
+import nature4 from "@/asset/img/card/nature4.jpg"
+import nature5 from "@/asset/img/card/nature5.jpg"
+import nature6 from "@/asset/img/card/nature6.jpg"
+import nature7 from "@/asset/img/card/nature7.jpg"
+import nature8 from "@/asset/img/card/nature8.jpg"
+import nature9 from "@/asset/img/card/nature9.jpg"
+import nature10 from "@/asset/img/card/nature10.jpg"
 
 const images = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
-    img9,
-    img10
+    img1, img2, img3, img4, img5, img6, img7, img8, img9, img10,
+    nature1, nature2, nature3, nature4, nature5, nature6, nature7, nature8, nature9, nature10
 ]
 
 function Card({children, index}) {
-    return <div className={styles.cardWrap} style={{backgroundImage: `url(${images[index]})`}}>
+    return <div className={styles.cardWrap} style={{backgroundImage: `url(${images[index + 10]})`}}>
         <div className={styles.cardContent}>
             {children}
         </div>

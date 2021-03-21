@@ -14,7 +14,7 @@ function PostCard({postInfo, id}) {
                 <Link to={`/frontEnd/postDetail/${id}`}>{title}</Link>
             </div>
             <AnTagsLink tags={tags}/>
-            <div>{formatDate(date)}</div>
+            <div className={styles.time}>{formatDate(date)}</div>
         </div>
     </div>
 }
