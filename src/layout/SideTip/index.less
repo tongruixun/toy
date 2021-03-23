@@ -1,0 +1,92 @@
+.sideTip {
+  position: fixed;
+  max-width: 80%;
+  z-index: 1;
+
+  .btn {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 18px;
+    background-image: radial-gradient(circle at 16% 16%,#b5d5ff 14%,#6861d8 100%);
+    padding: 0;
+    border: 0;
+    opacity: .5;
+    z-index: 1;
+
+
+    &:after {
+      content: attr(data-label);
+    }
+
+    &:hover {
+      opacity: 1;
+      animation: heartbeat 1s ease-out infinite;
+    }
+  }
+
+  .close {
+    position: absolute;
+    right: -20px;
+    bottom: 40px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    line-height: 18px;
+    background: #e3e3e3;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:after {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 2px;
+      background: #fff;
+      vertical-align: .2em;
+    }
+  }
+
+  &:not(:hover) {
+    .close {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+.sideTipActive {
+  .btn {
+    opacity: 1;
+    background-image: radial-gradient(circle at 16% 16%,#efecec 14%,#bcbbd4 100%);
+
+    &:after {
+      width: 20px;
+    }
+
+    &:hover {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  .close {
+    visibility: hidden;
+  }
+
+}
+
+@keyframes heartbeat {
+  to,from {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}

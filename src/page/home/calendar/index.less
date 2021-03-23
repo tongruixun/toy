@@ -1,6 +1,7 @@
 .calendar {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   padding-top: 200px;
   box-sizing: border-box;
@@ -8,53 +9,4 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-
-  .heartWrap {
-    position: absolute;
-    background-color: #ff0000;
-    width: 40px;
-    height: 40px;
-    transform: rotateZ(45deg);
-    filter: drop-shadow(-4px -2px 12px red);
-    animation: heartbeat 1s ease-out infinite;
-    opacity: 0;
-    bottom: 0;
-    cursor: pointer;
-    transition: opacity 2s;
-
-    &:before {
-      content: '';
-      position: absolute;
-      background-color: red;
-      width: 40px;
-      height: 40px;
-      transform: translateX(-40px);
-      border-radius: 50% 0 0 50%;
-    }
-
-    &:after {
-      content: '';
-      position: absolute;
-      background-color: red;
-      width: 40px;
-      height: 40px;
-      transform: translateY(-40px);
-      border-radius: 50% 50% 0 0 ;
-    }
-  }
-
-  &:hover {
-    .heartWrap {
-      opacity: 0.9;
-    }
-  }
-
-  @keyframes heartbeat {
-    to,from {
-      transform: scale(0.8) rotateZ(45deg);
-    }
-    50% {
-      transform: scale(1.1) rotateZ(45deg);
-    }
-  }
 }

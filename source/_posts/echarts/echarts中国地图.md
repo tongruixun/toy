@@ -7,19 +7,24 @@ tags: echarts
 ## 一、地图数据下载
 
 一、高德开发平台数据
+
 > http://datav.aliyun.com/tools/atlas/#&lat=31.780695728407512&lng=106.720060693723&zoom=4.5
 
 二、 中国地图数据JSON API
+
 > https://geo.datav.aliyun.com/areas_v2/bound/100000.json
 > https://geo.datav.aliyun.com/areas/bound/geojson?code=100000
 
 三、中国地图数据JSON API(包含子区域)
+
 > https://geo.datav.aliyun.com/areas_v2/bound/100000_full.json
 > https://geo.datav.aliyun.com/areas/bound/geojson?code=100000_full
  
 ## 二、注册地图
+
 注册可用的地图，必须在包括 geo 组件或者 map 图表类型的时候才能使用。
 `echarts.registerMap(mapName: string, geoJson: Object, specialAreas?: Object)`
+
 - `mapName`
   地图名称，在 geo 组件或者 map 图表类型中设置的 map 对应的就是该值。
     
@@ -29,10 +34,11 @@ tags: echarts
 - `specialAreas`
   可选。将地图中的部分区域缩放到合适的位置，可以使得整个地图的显示更加好看。
   
+
+
 ```javascript
 import initChinaData from './china2.json';
 import initChinaData2 from './china.json';
-
 
 useEffect(() => {
   const myChart = echarts.init(chartsRef.current);

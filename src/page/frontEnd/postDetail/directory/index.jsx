@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import classNames from "classnames/bind";
 import styles from './index.less'
+import SideTip from "@/layout/SideTip";
 
 const cxBind = classNames.bind(styles);
 
 function Directory(props) {
 
     const [curNav, setCurNav] = useState('');
-    const [bool, setBool] = useState('');
 
     useEffect(() => {
         setCurNav(props.dirList[0]?.label)
@@ -26,19 +26,8 @@ function Directory(props) {
         }
     }
 
-    return <div className={styles.wrap}>
-        <div title='目录' className={styles.directoryUl} onClick={() => {
-            if (bool === '' || bool === 'hidden') {
-                setBool('active')
-            }
-            if (bool === 'active') {
-                setBool('hidden')
-            }
-
-        }}>
-            <span className='iconfont icon-gengduo'/>
-        </div>
-        <div className={cxBind({directoryWrapper: true, hidden: bool === 'hidden', active: bool === 'active'})}>
+    return <SideTip tipLabel="目录">
+        <div className={cxBind({directoryWrapper: true})}>
             {
                 props.dirList.map(({label, level}, index) => {
                     return <div
@@ -52,7 +41,7 @@ function Directory(props) {
                 })
             }
         </div>
-    </div>
+    </SideTip>
 }
 
 export default Directory;

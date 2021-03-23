@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import styles from './index.less'
 import NavBar from "@/layout/NavBar";
+// import axios from "axios";
 import * as echarts from 'echarts';
 import initChinaData from './china.json';
 

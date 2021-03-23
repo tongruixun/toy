@@ -1,87 +1,34 @@
-.wrap {
-  position: fixed;
-  right: 68px;
-  bottom: 128px;
-  z-index: 999;
+.directoryWrapper {
+  display: inline;
+  border-left: 1px solid #a2a9b6;
+  font-size: 14px;
+  text-align: left;
 
-  .directoryUl {
-    &:hover {
-      transform: scale(1.2);
-    }
-    :global {
-      .iconfont {
-        font-size: 32px;
-        color: #5e7987;
-      }
-    }
-  }
-
-  .directoryWrapper {
-    display: inline;
-    border-left: 1px solid #a2a9b6;
-    position: absolute;
-    font-size: 14px;
+  .directoryLi {
+    display: block;
+    padding: 0 8px;
+    line-height: 24px;
+    margin-left: -2px;
+    border-left: 3px solid transparent;
+    color: #242934;
+    opacity: .6;
+    transition: opacity .2s;
     text-align: left;
-    right: 0;
-    bottom: 200px;
-    background-color: #ffffff;
-    transform:scale(0);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    width: 256px;
 
-    .directoryLi {
-      display: block;
-      padding: 0 8px;
-      line-height: 24px;
-      margin-left: -2px;
-      border-left: 3px solid transparent;
-      color: #242934;
-      opacity: .6;
-      transition: opacity .2s;
-      text-align: left;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      cursor: pointer;
-      width: 256px;
-
-      &:hover {
-        color: #34538b;
-        opacity: 1;
-      }
-    }
-
-    .isActive {
-      border-left-color: #34538b;
+    &:hover {
       color: #34538b;
       opacity: 1;
     }
   }
 
-  .active {
-    animation: unfold .5s 0s linear forwards;
-  }
-
-  .hidden {
-    animation: slowFade .5s 0s linear forwards;
-  }
-
-  @keyframes unfold {
-    100% {
-      opacity:1;
-      transform:scale(1);
-    }
-  }
-
-  @keyframes slowFade {
-    0% {
-      transform:translateY(0) rotate(0deg);
-      opacity:1;
-    }
-    99.9% {
-      transform:translateY(600px) rotate(45deg);
-      opacity:0;
-    }
-    100% {
-      transform:scale(0);
-    }
+  .isActive {
+    border-left-color: #34538b;
+    color: #34538b;
+    opacity: 1;
   }
 }

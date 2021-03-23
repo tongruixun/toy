@@ -6,7 +6,7 @@ import Countdown from "./countdown";
 import Clock from "./clock";
 import styles from './index.less'
 
-const newItems = [{title: '示例', endDate: '2021-3-4'}];
+const newItems = [{title: '15', endDate: '2021-4-15'}];
 
 
 function Calendar() {
@@ -23,7 +23,6 @@ function Calendar() {
     }, [])
 
     return <div className={styles.calendar}>
-        {/*<div className={styles.heartWrap}/>*/}
         <Clock curTime={curTime}/>
         <Countdown countdowns={countdowns}/>
     </div>

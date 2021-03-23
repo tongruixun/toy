@@ -1,0 +1,45 @@
+.tipModalWrapper {
+  min-width: 300px;
+  min-height: 300px;
+  display: inline;
+  border-left: 1px solid #a2a9b6;
+  position: absolute;
+  font-size: 14px;
+  text-align: left;
+  right: 10px;
+  bottom: 30px;
+  background-color: #dddddd;
+  transform:scale(0);
+  border-radius: 5px;
+  box-shadow: 2px 4px 14px 0 rgb(0 0 0 / 7%);
+  z-index: 100;
+}
+
+.active {
+  animation: unfold .5s 0s linear forwards;
+}
+
+.hidden {
+  animation: slowFade .5s 0s linear forwards;
+}
+
+@keyframes unfold {
+  100% {
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes slowFade {
+  0% {
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  99.9% {
+    transform:translateY(600px) rotate(45deg);
+    opacity:0;
+  }
+  100% {
+    transform:scale(0);
+  }
+}
