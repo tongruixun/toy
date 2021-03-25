@@ -6,13 +6,21 @@ import styles from './index.less'
 
 const cxBind = classNames.bind(styles);
 
-function SideTip({children, tipLabel = "boom", option = {}}) {
+function SideTip({children, tipLabel = "boom", style = {}, onClick}) {
 
     const [sideTip, setSideTip] = useState('');
 
+    function handleClick() {
+        if(onClick) {
+            onClick()
+        } else {
+            setSideTip(sideTip === '' || sideTip === 'hidden' ? 'active' : 'hidden')
+        }
+    }
+
     return (
         <div
-            style={{right: option.right || 40, bottom: option.bottom || 40}}
+            style={{right: 40, bottom: 40, ...style}}
             className={cxBind({sideTip: true, sideTipActive: sideTip === 'active'})}
         >
             <TipModal bool={sideTip}>
@@ -21,11 +29,9 @@ function SideTip({children, tipLabel = "boom", option = {}}) {
             <button
                 data-label={tipLabel}
                 className={styles.btn}
-                onClick={() => {
-                    setSideTip(sideTip === '' || sideTip === 'hidden' ? 'active' : 'hidden')
-                }}
+                onClick={handleClick}
             />
-            <button className={styles.close}/>
+            {/*<button className={styles.close}/>*/}
         </div>
     )
 }

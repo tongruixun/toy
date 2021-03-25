@@ -30,7 +30,7 @@ function Home() {
         </SideTip>
         <SideTip
             tipLabel="最新"
-            option={{
+            style={{
                 bottom: 120
             }}
         >

@@ -5,6 +5,8 @@ import FrontEnd from "../page/frontEnd";
 import About from "../page/about";
 import PostDetail from "../page/frontEnd/postDetail";
 import Overview from "../page/frontEnd/Overview";
+import DataEnter from "@/page/about/DataEnter";
+import FunctionTest from "@/page/about/FunctionTest";
 
 function parseMenu(routes) {
     return routes.map(item => {
@@ -56,6 +58,19 @@ const config = {
                     path: '/about',
                     icon: 'aboutme',
                     component: About,
+                    routes: [
+                        {
+                            title: '数据录入',
+                            path: '/about/enter',
+                            icon: 'aboutme',
+                            component: DataEnter
+                        },{
+                            title: '功能测试',
+                            path: '/about',
+                            icon: 'aboutme',
+                            component: FunctionTest
+                        }
+                    ]
                 },{
                     path: '/postDetail/:id',
                     component: PostDetail,
