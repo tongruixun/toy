@@ -70,3 +70,42 @@ export const deviceApi = {
     getBaseSensor,
     addSensors
 }
+
+
+function getMonitorItems(projectId) {
+    return request({
+        url: `/monitor/project/v2/pointManage/item/${projectId}`,
+        method: "get"
+    });
+}
+
+function getSensorByMonitorItem(params) {
+    return request({
+        url: "/monitor/project/formula/sensorInfo",
+        method: "get",
+        params
+    });
+}
+
+function getGroupNameByMonitorItem(params) {
+    return request({
+        url: "/monitor/project/v2/pointManage/groupName",
+        method: "get",
+        params
+    });
+}
+
+function addPoint(data) {
+    return request({
+        url: "/monitor/project/v2/pointManage/point",
+        method: "post",
+        data
+    });
+}
+
+export const monitorItemPoint = {
+    getMonitorItems,
+    getGroupNameByMonitorItem,
+    getSensorByMonitorItem,
+    addPoint
+}

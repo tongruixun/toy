@@ -11,7 +11,7 @@ const urls = {
     pro: 'http://gateway.zdjcyun.com'
 }
 
-APP_ENV.API_BASE_URL = urls.test;
+APP_ENV.API_BASE_URL = urls.pro;
 
 const request = axios.create({baseURL: APP_ENV.API_BASE_URL})
 

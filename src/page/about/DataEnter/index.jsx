@@ -1,15 +1,17 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Form, Input, Button, Divider, message, Select, InputNumber, Tabs, Table, Spin} from "antd";
 import TokenUtils from "@/util/token";
-import {deviceApi} from '../service'
+import {deviceApi, monitorItemPoint} from '../service'
 import 'antd/dist/antd.css';
 import styles from '../index.less'
+import ExcelInput from "@/page/about/components/ExcelInput";
+import {debounce} from "@/util/util";
 
 const {Option} = Select;
 const {TabPane} = Tabs;
 
 const loginCode = {
-    0: '未登录',
+    0: '请先先进行登录',
     1: '已登录',
     2: '登录态过期'
 }
@@ -71,7 +73,11 @@ function DataEnter() {
                 <Form.Item label="token" name="token" rules={[{required: true, message: 'token'}]}>
                     <Input style={{width: 300}} placeholder="token"/>
                 </Form.Item>
-                <Form.Item label="项目ID" name="projectId" rules={[{required: true, message: '请输入projectId'}]}>
+                <Form.Item
+                    label="项目ID"
+                    name="projectId"
+                    rules={[{required: true, message: '请输入projectId'}]}
+                >
                     <Input placeholder="项目ID"/>
                 </Form.Item>
                 <Form.Item>
@@ -97,6 +103,7 @@ function DataEnter() {
                 </TabPane>
                 <TabPane tab="添加传感器" key="2">
                     <Sensor
+                        setLoading={setLoading}
                         projectId={projectId}
                     />
                 </TabPane>
@@ -496,6 +503,7 @@ function Sensor({projectId, setLoading}) {
                         message: "请输入长度小于2的整数"
                     }
                 ]}
+                initialValue={1}
             >
                 <Input placeholder="请输入通道号"/>
             </Form.Item>
@@ -508,6 +516,7 @@ function Sensor({projectId, setLoading}) {
                         message: "请输入长度小于2的整数"
                     }
                 ]}
+                initialValue={1}
             >
                 <Input style={style} placeholder="示例:1234"/>
             </Form.Item>
@@ -521,6 +530,7 @@ function Sensor({projectId, setLoading}) {
                         message: "请输入小于10的数字"
                     }
                 ]}
+                initialValue={1}
             >
                 <Input style={style} placeholder="请输入标定系数"/>
             </Form.Item>
@@ -546,8 +556,24 @@ function Sensor({projectId, setLoading}) {
 function MonitorPoint({projectId, setLoading}) {
 
     const [form] = Form.useForm();
+    const [pointNames, setPointNames] = useState([]);
+    const [monitorItems, setMonitorItems] = useState([]);
+    const [groups, setGroups] = useState([]);
 
-    function onFinish() {
+    function onFinish(values) {
+        if (pointNames.length < 1) {
+            message.error('请录入测点');
+        } else {
+            const {collectionType, groupName, monitorItemId} = values;
+            const [name, id] = groupName;
+            const params = {
+                monitorItemId,
+                groupName: name,
+                groupId: id,
+                collectionType,
+            }
+            addPoint(params);
+        }
     }
 
     function overView() {
@@ -556,53 +582,133 @@ function MonitorPoint({projectId, setLoading}) {
     function reset() {
     }
 
+    function onExcelChange(data) {
+        if (data[0]) {
+            setPointNames(data[0]);
+        }
+    }
+
+    function addPoint(values) {
+        const {monitorItemId, groupId, groupName, collectionType} = values;
+        setLoading(true);
+        new Promise((resolve, reject) => {
+            monitorItemPoint.getSensorByMonitorItem({projectId, monitorItemId}).then(({data}) => {
+                if (data.length < pointNames.length) {
+                    reject(new Error(`设备数少于测点数;设备数为${data.length};要添加的测点数为${pointNames.length};`))
+                }
+                const promiseList = [];
+
+                pointNames.forEach((pointName, index) => {
+                    let deviceVOs = JSON.stringify([{"deviceId": data[index].sensorId}]);
+                    const formData = new FormData();
+
+                    formData.append('pointName', pointName);
+                    formData.append('groupId', groupId);
+                    formData.append('groupName', groupName);
+                    formData.append('monitorItem', monitorItemId);
+                    formData.append('collectionType', collectionType);
+                    formData.append('projectId', projectId);
+                    formData.append('deviceVOs', deviceVOs);
+
+                    promiseList.push(monitorItemPoint.addPoint(formData));
+                })
+
+                resolve(promiseList);
+            }).catch(err => {
+                reject(err);
+            })
+        }).then((promiseList) => {
+            return Promise.all(promiseList).then(() => {
+                message.success('操作成功')
+                setLoading(false);
+            })
+        }).catch(err => {
+            message.error(err.message)
+            setLoading(false);
+        })
+    }
+
+    function getGroupName(itemId) {
+        monitorItemPoint.getGroupNameByMonitorItem({projectId, itemId}).then(({data}) => {
+            setGroups(data)
+        }).catch(err => {
+            console.log(err)
+        })
+
+    }
+
+    const pointNameChange = debounce((value) => {
+        const list = value.split(',');
+        setPointNames(list);
+    }, 500)
+
+
+    useEffect(() => {
+
+        if (projectId) {
+            monitorItemPoint.getMonitorItems(projectId).then(({data}) => {
+                setMonitorItems(data);
+            }).catch(err => {
+                console.log(err)
+            })
+        } else {
+            message.error('请设置项目id');
+        }
+    }, [projectId])
+
     const style = {width: 160}
     return <div>
+        <div>
+            <div>
+                <strong>方式一:</strong> 读取<strong style={{color: 'red'}}>Excel表格第一行</strong>的数据作为测点名称&ensp;<br/>
+                <ExcelInput onChange={onExcelChange}/>
+            </div>
+            <Divider/>
+            <strong>方式二:</strong> 手动输入,各测点名称用逗号分隔(例: 测点名1,测点名2,测点名3)
+            <Input onChange={e => pointNameChange(e.target.value)}/>
+            <Divider/>
+            <div style={{padding: 24, backgroundColor: '#fff'}}>
+                <strong style={{color: 'red'}}>将添加的测点名称:</strong> {pointNames.join(',')}
+            </div>
+        </div>
+        <Divider/>
         <Form form={form} onFinish={onFinish} layout="inline">
             <Form.Item
-                label='测点名称'
-                name='pointName'
-                rules={[
-                    {required: true, message: '请输入测点名称'}]}
-            >
-                <Input placeholder="请输入测点名称"/>
-            </Form.Item>
-            <Form.Item
                 label='监测测项'
-                name='monitorItem'
-                rules={[
-                    {required: true, message: '请输入监测测项'}]}
+                name='monitorItemId'
+                rules={[{required: true, message: '请选择监测测项'}]}
             >
-                <Input placeholder="请输入监测测项"/>
+                <Select onSelect={id => getGroupName(id)} style={style} placeholder='请选择监测测项'>
+                    {
+                        monitorItems.map(({itemName, monitorItemId}) => (
+                            <Option key={monitorItemId} value={monitorItemId}>{itemName}</Option>))
+                    }
+                </Select>
             </Form.Item>
             <Form.Item
                 label='数据采集方式'
                 name='collectionType'
-                rules={[{required: true, message: '请输入数据采集方式'}]}
+                rules={[{required: true, message: '请选择数据采集方式'}]}
                 initialValue="设备采集"
             >
-                <Input placeholder="请输入数据采集方式"/>
+                <Select style={style} placeholder='请选择数据采集方式'>
+                    <Option value="设备采集">设备采集</Option>))
+                </Select>
             </Form.Item>
-            <Form.Item
-                label='设备'
-                name='deviceId'
-                rules={[
-                    {required: true, message: '请输入数设备'}]}
-            >
-                <Input placeholder="请输入设备"/>
-            </Form.Item>
-            <Divider/>
             <Form.Item
                 label='分组名称'
-                name='groupId'
+                name='groupName'
                 rules={[
-                    {required: true, message: '请输入分组名称'}]}
+                    {required: true, message: '请选择分组'}]}
             >
-                <Input placeholder="请输入分组名称"/>
+                <Select style={style} placeholder='请选择分组'>
+                    {
+                        groups.map(({mgId, groupName}) => (
+                            <Option key={mgId} value={[groupName, mgId]}>{groupName}</Option>))
+                    }
+                </Select>
             </Form.Item>
-            <Form.Item label='数量' name="number">
-                <InputNumber style={style} min={1} max={20}/>
-            </Form.Item>
+            <Divider/>
             <Form.Item>
                 <Button htmlType='submit' type="primary">添加测点</Button>
             </Form.Item>
