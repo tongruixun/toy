@@ -1,6 +1,35 @@
 [
 	{
 		"data": {
+			"title": "git版本操作和代码暂存",
+			"date": "2021-03-29T10:45:13.000Z",
+			"tags": "git"
+		},
+		"content": "<a id=\"一、版本回退\"><h2>一、版本回退</h2></a><a id=\"一、查看版本\"><h4>一、查看版本</h4></a><pre class='hljs'><code class=\"language-shell\">git <span class=\"hljs-built_in\">log</span>  <span class=\"hljs-comment\"># 查看完整版日志，只能查“过去”</span>\ngit reflog  <span class=\"hljs-comment\"># 查看简易版日志，能看“过去”和“将来”</span>\ngit <span class=\"hljs-built_in\">log</span> <span class=\"hljs-comment\">--pretty=oneline   # 让日志一行显示，比git reflog更详细一些</span>\n</code></pre>\n<a id=\"二、版本回退\"><h4>二、版本回退</h4></a><pre class='hljs'><code class=\"language-shell\">\n<span class=\"hljs-comment\"># 暂存区和工作区保持不变。此时本地仓回滚到版本号commit完成的那一刻。</span>\n<span class=\"hljs-string\">git</span> <span class=\"hljs-string\">reset</span> <span class=\"hljs-built_in\">--soft</span>\n\n<span class=\"hljs-comment\"># 表示本地仓和暂存区，都回滚到Y版本号。工作区代码不受影响</span>\n<span class=\"hljs-string\">git</span> <span class=\"hljs-string\">reset</span> <span class=\"hljs-built_in\">--mixed</span>  <span class=\"hljs-comment\"># 或者  git reset</span>\n\n<span class=\"hljs-comment\"># 本地仓、暂存区、工作区，三区都回滚</span>\n<span class=\"hljs-string\">git</span> <span class=\"hljs-string\">reset</span> <span class=\"hljs-built_in\">--hard</span> <span class=\"hljs-string\">HEAD</span>~<span class=\"hljs-string\">1</span>\n</code></pre>\n<a id=\"二、暂存修改\"><h2>二、暂存修改</h2></a><pre class='hljs'><code class=\"language-shell\">git stash save   # + ‘说明信息’ # 暂存代码，并添加说明\ngit stash list   # 查看stash列表\ngit stash apply  # 取出最近一次的stash\ngit stash apply  # 数字  <span class=\"hljs-comment\">// 输入list里对应的数字，取出对应的stash</span>\ngit stash --all  # <span class=\"hljs-comment\">// 暂存所有文件，包括没有被git追踪的文件</span>\n</code></pre>\n",
+		"separator": "---",
+		"prefixSeparator": true,
+		"directory": [
+			{
+				"label": "一、版本回退",
+				"level": 2
+			},
+			{
+				"label": "一、查看版本",
+				"level": 4
+			},
+			{
+				"label": "二、版本回退",
+				"level": 4
+			},
+			{
+				"label": "二、暂存修改",
+				"level": 2
+			}
+		],
+		"id": 1617014713
+	},
+	{
+		"data": {
 			"title": "SheetJS解析Excel",
 			"date": "2021-03-25T14:24:22.000Z",
 			"tags": "excel"
@@ -801,7 +830,7 @@
 			"date": "2021-01-26T10:26:58.000Z",
 			"tags": "git"
 		},
-		"content": "<a id=\"一、生成SSH密钥\"><h2>一、生成SSH密钥</h2></a><a id=\"一、输入下面的git命令，生成SSH秘钥\"><h4>一、输入下面的git命令，生成SSH秘钥</h4></a><pre class='hljs'><code class=\"language-bash\">ssh-keygen -<span class=\"hljs-built_in\">t</span> rsa -C <span class=\"hljs-string\">&quot;youremail@example.com&quot;</span>\n</code></pre>\n找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。linux   生成在路径 /root/.ssh/id_rsa.pub  文件中<br/>windows 生成在路径 C:\\Users\\admin.ssh\\id_rsa.pub 文件中<!--more-->\n\n<a id=\"二、找到github或gitee  SSH keys 页面，将id_ras.pub中的内容添加到key中\"><h4>二、找到github或gitee  SSH keys 页面，将<code>id_ras.pub</code>中的内容添加到key中</h4></a><a id=\"三、解决配置ssh公钥后，每次都要输入用户名和密码\"><h4>三、解决配置ssh公钥后，每次都要输入用户名和密码</h4></a><pre class='hljs'><code class=\"language-bash\">git config --<span class=\"hljs-keyword\">global</span> credential.helper <span class=\"hljs-keyword\">store</span>\n</code></pre>\n<a id=\"四、将本地仓库与远程仓库进行关联,git push推送到远程仓库\"><h4>四、将本地仓库与远程仓库进行关联,<code>git push</code>推送到远程仓库</h4></a><pre class='hljs'><code class=\"language-bash\"><span class=\"hljs-regexp\">//</span> 本地仓库关联远程仓库\ngit remote add origin https:<span class=\"hljs-regexp\">//gi</span>thub.com<span class=\"hljs-regexp\">/tongruixun/</span>trx-hexo.git\n<span class=\"hljs-regexp\">//</span> 本地内容推送到远程仓库\ngit push\n</code></pre>\n<a id=\"五、克隆到本地到本地仓库\"><h4>五、克隆到本地到本地仓库</h4></a>如果需要再另一台电脑上或另一个文件夹中克隆项目<pre class='hljs'><code class=\"language-bash\">git clone https:<span class=\"hljs-regexp\">//gi</span>thub.com<span class=\"hljs-regexp\">/tongruixun/</span>trx-hexo.git\n</code></pre>\n<a id=\"六、git错误\"><h4>六、git错误</h4></a>一、<code>error: failed to push some refs to &#39;https://github.com/tongruixun/trx-util.git</code><br/>问题原因: 远程库与本地库不一致造成的执行 <code>git pull --rebase origin master</code>该命令的意思是把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中<blockquote>\n<a href=\"https://blog.csdn.net/dietime1943/article/details/85682688\">https://blog.csdn.net/dietime1943/article/details/85682688</a></blockquote>\n",
+		"content": "<a id=\"一、生成SSH密钥\"><h2>一、生成SSH密钥</h2></a><a id=\"一、输入下面的git命令，生成SSH秘钥\"><h4>一、输入下面的git命令，生成SSH秘钥</h4></a><pre class='hljs'><code class=\"language-bash\">ssh-keygen -<span class=\"hljs-built_in\">t</span> rsa -C <span class=\"hljs-string\">&quot;youremail@example.com&quot;</span>\n</code></pre>\n找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。linux   生成在路径 /root/.ssh/id_rsa.pub  文件中<br/>windows 生成在路径 C:\\Users\\admin.ssh\\id_rsa.pub 文件中<!--more-->\n\n<a id=\"二、找到github或gitee  SSH keys 页面，将id_ras.pub中的内容添加到key中\"><h4>二、找到github或gitee  SSH keys 页面，将<code>id_ras.pub</code>中的内容添加到key中</h4></a><a id=\"三、解决配置ssh公钥后，每次都要输入用户名和密码\"><h4>三、解决配置ssh公钥后，每次都要输入用户名和密码</h4></a><pre class='hljs'><code class=\"language-bash\">git config --<span class=\"hljs-keyword\">global</span> credential.helper <span class=\"hljs-keyword\">store</span>\n</code></pre>\n<a id=\"四、将本地仓库与远程仓库进行关联,git push推送到远程仓库\"><h4>四、将本地仓库与远程仓库进行关联,<code>git push</code>推送到远程仓库</h4></a><pre class='hljs'><code class=\"language-bash\"><span class=\"hljs-regexp\">//</span> 本地仓库关联远程仓库\ngit remote add origin https:<span class=\"hljs-regexp\">//gi</span>thub.com<span class=\"hljs-regexp\">/tongruixun/</span>trx-hexo.git\n<span class=\"hljs-regexp\">//</span> 本地内容推送到远程仓库\ngit push\n</code></pre>\n<a id=\"五、克隆到本地到本地仓库\"><h4>五、克隆到本地到本地仓库</h4></a>如果需要再另一台电脑上或另一个文件夹中克隆项目<pre class='hljs'><code class=\"language-bash\">git clone https:<span class=\"hljs-regexp\">//gi</span>thub.com<span class=\"hljs-regexp\">/tongruixun/</span>trx-hexo.git\n</code></pre>\n<a id=\"六、git错误\"><h4>六、git错误</h4></a>一、<code>error: failed to push some refs to &#39;https://github.com/tongruixun/trx-util.git</code><br/>问题原因: 远程库与本地库不一致造成的执行 <code>git pull --rebase origin master</code>该命令的意思是把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中<a id=\"二、常用命令\"><h2>二、常用命令</h2></a><pre class='hljs'><code class=\"language-shell\"><span class=\"hljs-meta\"># 在当前commit处新建一个分支</span>\ngit branch 分支名称 \n\n<span class=\"hljs-meta\"># 切换分支</span>\ngit checkout 分支名称\n\n<span class=\"hljs-meta\"># 新建分支并自动切换</span>\ngit checkout -b 分支名称\n\n<span class=\"hljs-meta\"># 删除分支</span>\ngit branch -d 名称\n\n<span class=\"hljs-meta\"># 合并分支</span>\ngit merge 分支名称\n\n<span class=\"hljs-meta\"># 放弃解决冲突，取消merge</span>\ngit merge --abort\n\n<span class=\"hljs-meta\"># 查看当前的commit</span>\ngit show\n\n<span class=\"hljs-meta\"># 查看具体一个commit</span>\ngit show 引用\n\n<span class=\"hljs-meta\"># 想看到执行git commit后，将会提交什么</span>\ngit diff --staged\n\n<span class=\"hljs-meta\"># 想看到把所有文件都 add 后，将会向缓存区中增加什么内容</span>\ngit diff\n\n<span class=\"hljs-meta\"># 撤销上一次提交，并将暂存区文件重新提交（会将新的commit替换掉原有的commit）</span>\n<span class=\"hljs-meta\"># 把错误修改后，再执行以下命令</span>\ngit add .\ngit commit --amend\n\n<span class=\"hljs-meta\"># 撤回最新的commit</span>\ngit reset --hard HEAD^\n\n<span class=\"hljs-meta\"># 中间不同参数有不同的作用</span>\n<span class=\"hljs-meta\"># --hard：撤回最新的commit的同时，清空工作目录的所有改动；</span>\n<span class=\"hljs-meta\"># --soft：撤回最新的commit的同时，保留工作目录和缓存区的内容。</span>\n<span class=\"hljs-meta\"># --mixed（默认可以不写）：撤回最新的commit的同时，保留工作目录的内容，并清空缓存区</span>\n\n\n<span class=\"hljs-meta\"># 临时存放工作目录的改动</span>\ngit stash\n\n<span class=\"hljs-meta\"># 让没有被add过的文件也能临时存放</span>\ngit stash -u\n\n<span class=\"hljs-meta\"># 将临时文件移动回工作目录</span>\ngit stash pop\n</code></pre>\n<blockquote>\n<a href=\"https://blog.csdn.net/dietime1943/article/details/85682688\">https://blog.csdn.net/dietime1943/article/details/85682688</a></blockquote>\n",
 		"separator": "---",
 		"prefixSeparator": true,
 		"directory": [
@@ -832,6 +861,10 @@
 			{
 				"label": "六、git错误",
 				"level": 4
+			},
+			{
+				"label": "二、常用命令",
+				"level": 2
 			}
 		],
 		"id": 1611656818

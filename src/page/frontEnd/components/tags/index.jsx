@@ -23,7 +23,7 @@ function Tags() {
             tags.map((tag, index) => {
                 const random = Math.floor(Math.random() * 10);
                 return <em key={index} >
-                    <Link style={{color: colors[random]}} to={`/frontEnd/tag/${tag}`}>{tag}</Link>
+                    <Link style={{color: colors[random], fontSize: random + 10}} to={`/frontEnd/tag/${tag}`}>{tag}</Link>
                 </em>
             })
         }

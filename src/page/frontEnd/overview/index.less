@@ -1,9 +1,28 @@
 .overView {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+
+  .pagination {
+    height: 48px;
+    color: #7a7374;
+    font-size: 18px;
+    line-height: 48px;
+    text-align: right;
+    padding-right: 48px;
+    cursor: pointer;
+
+    &:hover {
+      color: #0066cc;
+    }
+  }
+  .contain {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    & > i {
+      width: 270px;
+    }
+  }
 }
 
 .cardWrap {
@@ -24,9 +43,9 @@
   }
 
 
-
   &:hover {
     background-size: 120% 120%;
+
     .cardContent {
       transform: translateY(100px);
     }
