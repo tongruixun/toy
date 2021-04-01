@@ -1,33 +1,38 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import styles from './index.less';
-import {tags} from "@/db";
+import { tags } from '@/db';
 
 function Tags() {
 
-    const colors = [
-        '#a61b29',
-        '#322f3b',
-        '#61649f',
-        '#1661ab',
-        '#0eb0c9',
-        '#869d9d',
-        '#55bb8a',
-        '#f9c116',
-        '#bec936',
-        '#835e1d'
-    ]
+  const colors = [
+    '#a61b29',
+    '#322f3b',
+    '#61649f',
+    '#1661ab',
+    '#0eb0c9',
+    '#869d9d',
+    '#55bb8a',
+    '#f9c116',
+    '#bec936',
+    '#440e25',
+    '#36292f',
+    '#1f2040',
+    '#c08eaf',
+    '#8076a3',
+    '#835e1d'
+  ];
 
-    return <div className={styles.tags}>
-        {
-            tags.map((tag, index) => {
-                const random = Math.floor(Math.random() * 10);
-                return <em key={index} >
-                    <Link style={{color: colors[random], fontSize: random + 10}} to={`/frontEnd/tag/${tag}`}>{tag}</Link>
-                </em>
-            })
-        }
-    </div>
+  return <div className={styles.tags}>
+    {
+      tags.map((tag, index) => {
+        const random = Math.floor(Math.random() * 15);
+        return <span key={index} style={{ backgroundColor: colors[random] }}>
+                    <Link style={{ color: '#fff' }} to={`/frontEnd/tag/${tag}`}>{tag}</Link>
+                </span>;
+      })
+    }
+  </div>;
 }
 
 export default Tags;

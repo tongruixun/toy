@@ -36,7 +36,7 @@ module.exports = {
         exclude: /node_modules/,
         // options: { presets: ["@babel/env"] }
       }, {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
           name: 'img/[name].[ext]?[hash]',
@@ -47,6 +47,9 @@ module.exports = {
         options: {
           name: 'font/[name].[ext]?[hash]',
         },
+      }, {
+        test: /\.html$/i,
+        loader: 'html-loader',
       },
     ],
   },

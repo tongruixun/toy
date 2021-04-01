@@ -32,27 +32,30 @@ function NavBar() {
         <span
           className={`iconfont icon-${item.icon}`}
         />
-&ensp;
+        &ensp;
         {item.title}
       </NavLink>
     );
   });
   return (
-    <div className={cxBind({ wrap: true, show })}>
+    <div className={cxBind({
+      wrap: true,
+      show
+    })}>
       <div className={styles.header}>
         <Link to="/">
-          <img alt="" src={logo} />
+          <img alt="" src={logo}/>
         </Link>
         有小鱼干么
       </div>
       <div className={styles.navBar}>
         <div className={styles.nav}>
           {
-                        renderNav(menu[0].routes)
-                    }
+            renderNav(menu[0].routes)
+          }
         </div>
         <div className={styles.search}>
-          <AnSearch onChange={(e) => onChange(e.target.value)} />
+          <AnSearch onChange={(e) => onChange(e.target.value)}/>
         </div>
       </div>
     </div>
