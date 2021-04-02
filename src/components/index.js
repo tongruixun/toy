@@ -1,9 +1,9 @@
-import AnSearch from "./AnSearch";
 import AnTagsLink from "./AnTagsLink";
-import TipModal from "./TipModal";
+import NavMenu from './NavMenu';
+import PageLoading from './PageLoading'
 
 export {
-    AnSearch,
     AnTagsLink,
-    TipModal
+    NavMenu,
+    PageLoading
 }

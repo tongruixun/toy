@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { themes } from '@/db';
 import PostCard from '@/page/frontEnd/overview/postCard';
+import { debounce } from '@/util/util';
 import styles from './index.less';
 
 import img1 from '@/asset/img/card/art-1.jpg';
@@ -49,6 +50,7 @@ function Overview() {
     pageSize: 10,
     pageNum: 1
   });
+  const history = useHistory();
 
   let {
     type,
@@ -99,10 +101,16 @@ function Overview() {
     }
   };
 
+  const onChange = debounce((value) => {
+    console.log(value);
+    history.push(`/frontEnd/search/${value}`);
+  }, 500);
+
   return (
     <div className={styles.overView}>
-      <div className={styles.pagination} onClick={onPageChange}>
-        NEXT --&gt;
+      <div className={styles.pagination}>
+        <input onChange={(e) => onChange(e.target.value)}/>
+        <span style={{marginLeft: 24}} onClick={onPageChange}> NEXT --&gt;</span>
       </div>
       <div className={styles.contain}>
         {

@@ -36,7 +36,7 @@ module.exports = {
         exclude: /node_modules/,
         // options: { presets: ["@babel/env"] }
       }, {
-        test: /\.(png|svg|jpg|gif|svg)$/,
+        test: /\.(png|svg|jpg|gif)$/,
         loader: 'file-loader',
         options: {
           name: 'img/[name].[ext]?[hash]',

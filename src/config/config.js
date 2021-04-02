@@ -47,20 +47,7 @@ const config = {
           title: 'ABOUT',
           path: '/about',
           icon: 'aboutme',
-          component: '/page/about',
-          routes: [
-            {
-              title: '数据录入',
-              path: '/about/enter',
-              icon: 'aboutme',
-              component: '/page/about/DataEnter',
-            }, {
-              title: '功能测试',
-              path: '/about',
-              icon: 'aboutme',
-              component: '/page/about/FunctionTest',
-            }
-          ]
+          component: '/page/about'
         }
       ]
     }

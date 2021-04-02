@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import routeConfig from './config/config';
+import { PageLoading } from '@/components';
 
 const { routes } = routeConfig;
 
@@ -13,7 +14,6 @@ function BasicRouter() {
     return <Switch>
       {
         routesConfig.map((item, index) => {
-          console.log(item.component);
           const Comp = lazy(() => import('.' + item.component));
           return <Route exact={item.exact} key={index} path={item.path}>
             <Comp>
@@ -28,7 +28,7 @@ function BasicRouter() {
   };
 
   return <Router>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<PageLoading/>}>
       {
         renderRoute(routes)
       }
