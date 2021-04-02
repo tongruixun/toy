@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from 'react-router-dom';
 import { themes } from '@/db';
 import PostCard from '@/page/frontEnd/overview/postCard';
 import { debounce } from '@/util/util';
@@ -45,17 +44,11 @@ function Card({
 
 function Overview() {
 
-  const [navList, setNavList] = useState([]);
+  const [navList, setNavList] = useState(themes);
   const [page, setPage] = useState({
     pageSize: 10,
     pageNum: 1
   });
-  const history = useHistory();
-
-  let {
-    type,
-    queryValue
-  } = useParams();
 
   const postInfoList = (list) => list
     .filter((item, index) =>
@@ -65,24 +58,6 @@ function Overview() {
       id
     }, index) => (
       <Card key={index} index={index}><PostCard id={id} postInfo={data}/></Card>));
-
-  useEffect(() => {
-    let dataSource = themes;
-    if (type === 'tag') {
-      dataSource = dataSource.filter(({ data: { tags } }) => {
-        if (Array.isArray(tags) && tags.includes(queryValue)) return true;
-        return tags === queryValue;
-      });
-    }
-    if (type === 'search') {
-      dataSource = dataSource.filter(({ data: { title } }) => {
-        return title.toUpperCase()
-          .includes(queryValue.toUpperCase());
-      });
-    }
-    const list = dataSource;
-    setNavList(list);
-  }, [page, queryValue]);
 
   const onPageChange = () => {
     const len = `${navList.length / 10}`;
@@ -102,22 +77,34 @@ function Overview() {
   };
 
   const onChange = debounce((value) => {
-    console.log(value);
-    history.push(`/frontEnd/search/${value}`);
+
+    setNavList(themes.filter(({ data: { title } }) => {
+      return title.toUpperCase()
+        .includes(value.toUpperCase());
+    }));
+
   }, 500);
 
   return (
     <div className={styles.overView}>
       <div className={styles.pagination}>
-        <input onChange={(e) => onChange(e.target.value)}/>
-        <span style={{marginLeft: 24}} onClick={onPageChange}> NEXT --&gt;</span>
+        <span>
+          <input autoComplete="off" className={styles.swing} id='search' type="text"
+                 placeholder="输入标题查找内容" onChange={(e) => onChange(e.target.value)}/>
+          <label htmlFor="search">search</label>
+        </span>
+        <span className={styles.next} onClick={onPageChange}> NEXT --&gt;</span>
       </div>
-      <div className={styles.contain}>
-        {
-          postInfoList(navList)
-        }
-        <i/><i/><i/><i/><i/>
-      </div>
+      {
+        navList.length > 0 ? (
+          <div className={styles.contain}>
+            {
+              postInfoList(navList)
+            }
+            <i/><i/><i/><i/><i/>
+          </div>
+        ) : null
+      }
     </div>
   );
 }

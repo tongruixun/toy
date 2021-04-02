@@ -4,18 +4,52 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import routeConfig from './config/config';
 import { PageLoading } from '@/components';
 
-const { routes } = routeConfig;
+const routes = [
+  {
+    title: '主页',
+    path: '/',
+    component: '/page/home',
+    icon: 'home',
+    exact: true,
+  }, {
+    title: '前端技术',
+    path: '/frontEnd',
+    icon: 'FE',
+    component: '/page/frontEnd',
+    routes: [
+      {
+        title: '全文',
+        path: '/frontEnd/postDetail/:id',
+        icon: 'FE',
+        component: '/page/frontEnd/postDetail',
+      }, {
+        title: '总览',
+        path: '/frontEnd',
+        icon: 'FE',
+        component: '/page/frontEnd/overview',
+      }
+    ]
+  }, {
+    title: 'ABOUT',
+    path: '/about',
+    icon: 'aboutme',
+    component: '/page/about',
+    exact: true,
+  }, {
+    path: '*',
+    component: '/layout/404'
+  }
+];
 
 function BasicRouter() {
   const renderRoute = (routesConfig) => {
     return <Switch>
       {
-        routesConfig.map((item, index) => {
+        routesConfig.map((item) => {
           const Comp = lazy(() => import('.' + item.component));
-          return <Route exact={item.exact} key={index} path={item.path}>
+          return <Route exact={item.exact} key={item.path} path={item.path}>
             <Comp>
               {
                 item.routes && renderRoute(item.routes)

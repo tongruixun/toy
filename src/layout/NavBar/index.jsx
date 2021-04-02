@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import { menu } from '@/config/config';
-import logo from '@/asset/logo.svg';
 import styles from './index.less';
+import { NavLogo } from '@/components';
 
 const cxBind = classNames.bind(styles);
 
@@ -20,36 +18,12 @@ function NavBar() {
     };
   }, []);
 
-  const renderNav = (menuData) => menuData.map((item) => {
-    if (item.hideMenu) return null;
-    return (
-      <NavLink activeClassName="selected" exact={item.exact} key={item.path} to={item.path}>
-        <span
-          className={`iconfont icon-${item.icon}`}
-        />
-        &ensp;
-        {item.title}
-      </NavLink>
-    );
-  });
   return (
     <div className={cxBind({
       wrap: true,
       show
     })}>
-      <div className={styles.header}>
-        <Link to="/">
-          <img alt="" src={logo}/>
-        </Link>
-        有小鱼干么
-      </div>
-      <div className={styles.navBar}>
-        <div className={styles.nav}>
-          {
-            renderNav(menu[0].routes)
-          }
-        </div>
-      </div>
+      <NavLogo />
     </div>
   );
 }

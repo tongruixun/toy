@@ -22,7 +22,8 @@ body {
     font-size: 14px;
     line-height: 1.6;
     color: #333;
-    background-color: #FCF5ED;
+    background-color: var(--bgColor);
+    background-image: url("./asset/common/bg_img.png");
 }
 
 /* LINKS
@@ -58,12 +59,6 @@ a:hover {
     background-color: #F5F5F5;
 }
 
-.app {
-    width: 100%;
-    position: relative;
-    background-color: var(--bgColor);
-    background-image: url("./asset/common/bg_img.png");
-}
 .selected.selected.selected.selected {
     color: #feba07;
 }
