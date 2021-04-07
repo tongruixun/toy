@@ -36,7 +36,39 @@ const routes = [
     path: '/about',
     icon: 'aboutme',
     component: '/page/about',
-    exact: true,
+    routes: [
+      {
+        title: '数据管理',
+        path: '/about/page',
+        component: '/page/about/page',
+        routes: [
+          {
+            title: '功能测试',
+            path: '/about/page/loading',
+            component: '/page/about/FunctionTest'
+          },
+          {
+            title: '数据录入',
+            path: '/about/page/dataEnter',
+            component: '/page/about/DataEnter',
+          },
+          {
+            title: '角色管理',
+            path: '/about/page/role',
+            component: '/page/about/Role',
+          },{
+            title: '首页',
+            path: '/about/page',
+            component: '/page/about/Role',
+          },
+        ]
+      },
+      {
+        title: '登录',
+        path: '/about',
+        component: '/page/about/Login',
+      },
+    ]
   }, {
     path: '*',
     component: '/layout/404'

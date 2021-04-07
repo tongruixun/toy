@@ -408,7 +408,7 @@ function Terminal({
 }
 
 Terminal.propTypes = {
-  setLoading: PropTypes.bool,
+  setLoading: PropTypes.func,
   projectId: PropTypes.string,
   baseTerminals: PropTypes.object
 };
@@ -725,7 +725,7 @@ function Sensor({
 }
 
 Sensor.propTypes = {
-  setLoading: PropTypes.bool,
+  setLoading: PropTypes.func,
   projectId: PropTypes.string,
 };
 
@@ -943,7 +943,7 @@ function MonitorPoint({
 }
 
 MonitorPoint.propTypes = {
-  setLoading: PropTypes.bool,
+  setLoading: PropTypes.func,
   projectId: PropTypes.string,
 };
 

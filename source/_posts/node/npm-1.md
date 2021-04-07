@@ -4,16 +4,27 @@ date: 2021-01-28 09:33:07
 tags: npm
 ---
 
+将自己开发的组件或函数模块发布到NPM，封装组件包方便在不同项目中使用
+
 ## 一、创建目录、初始化、开发模块、发布模块
+
+发布到NPM平台的包，是一个项目工程，跟我们平时工作中的项目类似，应该有一套完整的构建、开发、测试、打包压缩等步骤，所以应该把这个包当成一个项目来对待。
 
 #### 一、创建一个目录
 
-#### 二、在目录下执行 `npm init` (默认已安装node环境)
-```bash
-D:\tongruixun\GithubRepository\trx-util>node init
+创建一个目录并进入项目根目录
+```shell
+mkdir  moduleName
+cd modeuleName
 ```
 
-<!--more-->
+#### 二、在目录下执行 `npm init` (默认已安装node环境)
+
+在项目根目录执行`node init`生成文件`package.json`
+
+```bash
+node init
+```
 
 #### 三、创建`index.js`
 
@@ -33,18 +44,18 @@ module.exports.func = func;
 
 ```bash
 // 登录  本地模块文件
-D:\tongruixun\GithubRepository\trx-util>node adduser
+D:\******\trx-util>node adduser
 Username: tongruixun
 Password:
 Email: (this IS public) 1*****4342@qq.com
 Logged in as tongruixun on https://registry.npmjs.org/.
 
 // 查看登录用户
-D:\tongruixun\GithubRepository\trx-util>node whoami
+D:\******\trx-util>node whoami
 tongruixun
 
 // 发布模块到npm
-D:\tongruixun\GithubRepository\trx-util>node publish
+D:\******\trx-util>node publish
 
 
 ```
