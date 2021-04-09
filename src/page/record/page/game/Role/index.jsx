@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Input, Table, Space, Popconfirm } from 'antd';
 import PropTypes from 'prop-types';
-import SpaceBetween from '@/page/about/components/SpaceBetween';
-import CustomModal from '@/page/about/components/CustomModal';
+import SpaceBetween from '@/page/record/components/SpaceBetween';
+import CustomModal from '@/page/record/components/CustomModal';
 import * as api from './service';
 import styles from './index.less';
 

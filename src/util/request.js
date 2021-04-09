@@ -2,13 +2,15 @@ import axios from 'axios';
 import TokenUtils from '@/util/token';
 
 // 个人网站axios实例
-const baseUrl = {
-  dev: 'http://localhost:7001',
-  pro: 'http://106.15.249.68:7001/'
-};
+let baseUrl = 'http://localhost:7001';
+if (APP_EVN === 'dev') {
+  baseUrl = 'http://localhost:7001';
+} else {
+  baseUrl = 'http://106.15.249.68:7001/';
+}
 
 const trxRequest = axios.create({
-  baseURL: baseUrl.pro
+  baseURL: baseUrl
 });
 
 trxRequest.interceptors.request.use(config => {

@@ -5,8 +5,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'js/main.js',
+    filename: 'js/[name].js',
     path: path.resolve(__dirname, '../public'),
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   module: {
     rules: [

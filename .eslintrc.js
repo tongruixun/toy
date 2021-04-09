@@ -5,6 +5,9 @@ module.exports = {
     'commonjs': true,
     'node': true
   },
+  globals: {
+    APP_EVN: true
+  },
   'extends': [
     'eslint:recommended',
     'plugin:react/recommended',

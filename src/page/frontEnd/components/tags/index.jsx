@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './index.less';
 import { tags } from '@/db';
 
@@ -28,7 +27,7 @@ function Tags() {
       tags.map((tag, index) => {
         const random = Math.floor(Math.random() * 15);
         return <span key={index} style={{ backgroundColor: colors[random] }}>
-                    <Link style={{ color: '#fff' }} to={`/frontEnd/tag/${tag}`}>{tag}</Link>
+                    {tag}
                 </span>;
       })
     }

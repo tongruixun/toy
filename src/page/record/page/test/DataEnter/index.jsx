@@ -13,10 +13,10 @@ import {
   Spin
 } from 'antd';
 import TokenUtils from '@/util/token';
-import { deviceApi, monitorItemPoint } from '../service';
+import { deviceApi, monitorItemPoint } from '../../../service';
 import 'antd/dist/antd.css';
 import styles from './index.less';
-import ExcelInput from '@/page/about/components/ExcelInput';
+import ExcelInput from '@/page/record/components/ExcelInput';
 import { debounce } from '@/util/util';
 
 const { Option } = Select;

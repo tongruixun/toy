@@ -11,7 +11,7 @@ function Login() {
   function onFinish({ secretKey }) {
 
     if (secretKey === 'tongruixun') {
-      history.push('/about/page');
+      history.push('/record/page');
     } else {
       message.error('验证失败');
     }

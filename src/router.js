@@ -6,67 +6,77 @@ import {
 } from 'react-router-dom';
 import { PageLoading } from '@/components';
 
+const recordPath = '/page/record';
+
 const routes = [
   {
     title: '主页',
     path: '/',
-    component: '/page/home',
-    icon: 'home',
     exact: true,
+    component: '/page/home',
   }, {
     title: '前端技术',
     path: '/frontEnd',
-    icon: 'FE',
     component: '/page/frontEnd',
     routes: [
       {
         title: '全文',
-        path: '/frontEnd/postDetail/:id',
-        icon: 'FE',
+        path: '/postDetail/:id',
         component: '/page/frontEnd/postDetail',
       }, {
         title: '总览',
-        path: '/frontEnd',
-        icon: 'FE',
+        path: '',
         component: '/page/frontEnd/overview',
+        exact: true
       }
     ]
   }, {
     title: 'ABOUT',
-    path: '/about',
-    icon: 'aboutme',
-    component: '/page/about',
+    path: '/record',
+    component: '/page/record',
     routes: [
       {
         title: '数据管理',
-        path: '/about/page',
-        component: '/page/about/page',
+        path: '/page',
+        component: '/layout/ProLayout',
         routes: [
           {
             title: '功能测试',
-            path: '/about/page/loading',
-            component: '/page/about/FunctionTest'
-          },
-          {
-            title: '数据录入',
-            path: '/about/page/dataEnter',
-            component: '/page/about/DataEnter',
+            path: '/test',
+            component: '/layout/BasicLayout',
+            icon: 'test',
+            routes: [
+              {
+                title: '加载状态',
+                path: '/loading',
+                component: '@r/page/test/Loading',
+              },
+              {
+                title: '数据录入',
+                path: '/dataEnter',
+                component: '@r/page/test/DataEnter',
+              },
+            ]
           },
           {
             title: '角色管理',
-            path: '/about/page/role',
-            component: '/page/about/Role',
-          },{
-            title: '首页',
-            path: '/about/page',
-            component: '/page/about/Role',
-          },
+            path: '/game',
+            icon: 'game',
+            component: '/layout/BasicLayout',
+            routes: [
+              {
+                title: '角色管理',
+                path: '/role',
+                component: '@r/page/game/Role',
+              },
+            ]
+          }
         ]
       },
       {
         title: '登录',
-        path: '/about',
-        component: '/page/about/Login',
+        path: '/login',
+        component: '@r/Login',
       },
     ]
   }, {
@@ -75,29 +85,34 @@ const routes = [
   }
 ];
 
+export const aboutRoutes = routes.filter(item => item.path === '/record')[0].routes.filter(item => item.path === '/page')[0].routes;
+
 function BasicRouter() {
-  const renderRoute = (routesConfig) => {
-    return <Switch>
-      {
-        routesConfig.map((item) => {
-          const Comp = lazy(() => import('.' + item.component));
-          return <Route exact={item.exact} key={item.path} path={item.path}>
-            <Comp>
-              {
-                item.routes && renderRoute(item.routes)
-              }
-            </Comp>
-          </Route>;
-        })
-      }
-    </Switch>;
-  };
+  function renderRoute(routesConfig, routePath = '') {
+    return routesConfig.map((item) => {
+      // 递归层级拼接路由路径和组件路径
+      const rPath = `${routePath}${item.path}`;
+      const cPath = item.component.replace('@r', recordPath);
+
+      // 引入组件 懒加载
+      const Comp = lazy(() => import('.' + cPath));
+      return <Route exact={item.exact} key={item.path} path={rPath}>
+        <Comp>
+          {
+            item.routes && renderRoute(item.routes, rPath)
+          }
+        </Comp>
+      </Route>;
+    });
+  }
 
   return <Router>
     <Suspense fallback={<PageLoading/>}>
-      {
-        renderRoute(routes)
-      }
+      <Switch>
+        {
+          renderRoute(routes)
+        }
+      </Switch>
     </Suspense>
   </Router>;
 }

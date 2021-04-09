@@ -13,7 +13,7 @@ const navConfig = [
     title: '首页',
     icon: 'home'
   }, {
-    path: '/about',
+    path: '/record/Login',
     title: '关于',
     icon: 'aboutme'
   }, {
