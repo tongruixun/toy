@@ -11,19 +11,16 @@ function SideTip({
 
   const history = useHistory();
 
-  function pageNav(uri) {
-    history.push(uri);
-  }
-
   function handleClick() {
-    pageNav(uri);
+    history.push(uri);
   }
 
   return (
     <div
       style={{
         right: 40,
-        bottom: 40, ...style
+        bottom: 40,
+        ...style
       }}
       className={styles.sideTip}
     >

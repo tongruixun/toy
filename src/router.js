@@ -1,12 +1,9 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import {
   HashRouter as Router,
   Switch,
   Route
 } from 'react-router-dom';
-import { PageLoading } from '@/components';
-
-const recordPath = '/page/record';
 
 const routes = [
   {
@@ -41,6 +38,13 @@ const routes = [
         component: '/layout/ProLayout',
         routes: [
           {
+            title: '首页',
+            path: '/home',
+            component: '@r/page/home',
+            icon: 'home',
+            hideMenu: true
+          },
+          {
             title: '功能测试',
             path: '/test',
             component: '/layout/BasicLayout',
@@ -49,12 +53,12 @@ const routes = [
               {
                 title: '加载状态',
                 path: '/loading',
-                component: '@r/page/test/Loading',
+                component: '@r/page/test/Loading'
               },
               {
                 title: '数据录入',
                 path: '/dataEnter',
-                component: '@r/page/test/DataEnter',
+                component: '@r/page/test/DataEnter'
               },
             ]
           },
@@ -67,7 +71,7 @@ const routes = [
               {
                 title: '角色管理',
                 path: '/role',
-                component: '@r/page/game/Role',
+                component: '@r/page/game/Role'
               },
             ]
           }
@@ -80,12 +84,17 @@ const routes = [
       },
     ]
   }, {
+    path: '/DataCharts',
+    component: '/page/DataCharts'
+  }, {
     path: '*',
     component: '/layout/404'
   }
 ];
 
 export const aboutRoutes = routes.filter(item => item.path === '/record')[0].routes.filter(item => item.path === '/page')[0].routes;
+
+const recordPath = '/page/record';
 
 function BasicRouter() {
   function renderRoute(routesConfig, routePath = '') {
@@ -94,8 +103,7 @@ function BasicRouter() {
       const rPath = `${routePath}${item.path}`;
       const cPath = item.component.replace('@r', recordPath);
 
-      // 引入组件 懒加载
-      const Comp = lazy(() => import('.' + cPath));
+      const Comp = require(`.${cPath}`).default;
       return <Route exact={item.exact} key={item.path} path={rPath}>
         <Comp>
           {
@@ -107,13 +115,11 @@ function BasicRouter() {
   }
 
   return <Router>
-    <Suspense fallback={<PageLoading/>}>
       <Switch>
         {
           renderRoute(routes)
         }
       </Switch>
-    </Suspense>
   </Router>;
 }
 

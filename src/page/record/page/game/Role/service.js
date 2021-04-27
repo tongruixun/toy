@@ -1,37 +1,19 @@
-import { trxRequest } from '@/util/request';
+import { request } from '@/util/request';
 
 export function addRole(data) {
-  return trxRequest(
-    {
-      url: 'role',
-      method: 'post',
-      data
-    });
+  return request.post('/role', data);
 }
 
 export function removeRole(id) {
-  return trxRequest(
-    {
-      url: `role/${id}`,
-      method: 'delete',
-    });
+  return request.delete(`/role/${id}`);
 }
 
 export function roles() {
-  return trxRequest(
-    {
-      url: 'role',
-      method: 'get',
-    });
+  return request.get('/role');
 }
 
 export function updateRole(data) {
-  return trxRequest(
-    {
-      url: 'role',
-      method: 'put',
-      data
-    });
+  return request.put('/role', data);
 }
 
 

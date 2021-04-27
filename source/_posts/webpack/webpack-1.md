@@ -156,10 +156,25 @@ module.exports = {
 }
 ```
 
-## 问题及解决方案
 
+## 五、使用require.context导入模块
+
+```javascript
+const cache = {};
+
+function importAll(r) {
+  r.keys().forEach((key) => (cache[key] = r(key)));
+}
+
+importAll(require.context('./page/', true, /\.jsx$/));
+
+console.log(cache)
 ```
+
+## 问题及解决方案
 
 ## 参考链接
 
 > https://webpack.docschina.org/guides/output-management/#setting-up-htmlwebpackplugin
+
+

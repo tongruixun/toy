@@ -5,12 +5,14 @@ import { NavLogo, SpinPage } from '@/components';
 import { aboutRoutes } from '@/router';
 import {
   PieChartOutlined,
-  UserOutlined
+  UserOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 
 const iconMap = {
   test: <PieChartOutlined/>,
-  game: <UserOutlined/>
+  game: <UserOutlined/>,
+  home: <HomeOutlined />
 };
 
 const {

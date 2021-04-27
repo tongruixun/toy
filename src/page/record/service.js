@@ -1,18 +1,18 @@
-import request, {login} from "@/util/request";
+import dataRequest, {login} from "@/util/request";
 
 export function accountLogin(params) {
     return login.post('/monitor/oauth/oauth/token', null, {params});
 }
 
 function getBaseTerminals() {
-    return request({
+    return dataRequest({
         url: "/monitor/project/terminal/baseTerminals",
         method: "get"
     });
 }
 
 function addTerminals(data) {
-    return request({
+    return dataRequest({
         url: "/monitor/project/terminal/addTerminals",
         method: "post",
         data
@@ -20,7 +20,7 @@ function addTerminals(data) {
 }
 
 function getTerminalDetail(terminalId) {
-    return request({
+    return dataRequest({
         url: "/monitor/project/terminal/detail",
         method: "get",
         params: {
@@ -30,7 +30,7 @@ function getTerminalDetail(terminalId) {
 }
 
 function getBaseSensor(baseTerminalId) {
-    return request({
+    return dataRequest({
         url: "/monitor/project/sensor/baseSensors",
         method: "get",
         params: {
@@ -40,7 +40,7 @@ function getBaseSensor(baseTerminalId) {
 }
 
 function addSensors(data) {
-    return request({
+    return dataRequest({
         url: "/monitor/project/sensor/addSensors",
         method: "post",
         data
@@ -53,7 +53,7 @@ function addSensors(data) {
  * @returns {AxiosPromise}
  */
 function getGenerateId(deviceType) {
-    return request({
+    return dataRequest({
         url: "/monitor/project/terminal/generate/usableNumber",
         method: "get",
         params: {
@@ -73,14 +73,14 @@ export const deviceApi = {
 
 
 function getMonitorItems(projectId) {
-    return request({
+    return dataRequest({
         url: `/monitor/project/v2/pointManage/item/${projectId}`,
         method: "get"
     });
 }
 
 function getSensorByMonitorItem(params) {
-    return request({
+    return dataRequest({
         url: "/monitor/project/formula/sensorInfo",
         method: "get",
         params
@@ -88,7 +88,7 @@ function getSensorByMonitorItem(params) {
 }
 
 function getGroupNameByMonitorItem(params) {
-    return request({
+    return dataRequest({
         url: "/monitor/project/v2/pointManage/groupName",
         method: "get",
         params
@@ -96,7 +96,7 @@ function getGroupNameByMonitorItem(params) {
 }
 
 function addPoint(data) {
-    return request({
+    return dataRequest({
         url: "/monitor/project/v2/pointManage/point",
         method: "post",
         data

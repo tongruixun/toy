@@ -11,7 +11,7 @@ function Login() {
   function onFinish({ secretKey }) {
 
     if (secretKey === 'tongruixun') {
-      history.push('/record/page');
+      history.push('/record/page/home');
     } else {
       message.error('验证失败');
     }
@@ -20,7 +20,7 @@ function Login() {
   return <div className={styles.wrap}>
     <Form layout='inline' form={form} onFinish={onFinish}>
       <Form.Item label='秘钥' name='secretKey'>
-        <Input/>
+        <Input type='password'/>
       </Form.Item>
       <Form.Item>
         <Button type='primary' htmlType='submit'>用户验证</Button>

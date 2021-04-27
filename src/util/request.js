@@ -4,22 +4,23 @@ import TokenUtils from '@/util/token';
 // 个人网站axios实例
 let baseUrl = 'http://localhost:7001';
 if (APP_EVN === 'dev') {
-  baseUrl = 'http://localhost:7001';
+  // baseUrl = 'http://localhost:7001';
+  baseUrl = 'http://106.15.249.68:7001';
 } else {
-  baseUrl = 'http://106.15.249.68:7001/';
+  baseUrl = 'http://106.15.249.68:7001';
 }
 
-const trxRequest = axios.create({
+const request = axios.create({
   baseURL: baseUrl
 });
 
-trxRequest.interceptors.request.use(config => {
+request.interceptors.request.use(config => {
   return config;
 }, function (error) {
   return Promise.reject(error);
 });
 
-trxRequest.interceptors.response.use(function (response) {
+request.interceptors.response.use(function (response) {
   const {
     success,
     data
@@ -48,10 +49,10 @@ const urls = {
 
 APP_ENV.API_BASE_URL = urls.pro;
 
-const request = axios.create({ baseURL: APP_ENV.API_BASE_URL });
+const dataRequest = axios.create({ baseURL: APP_ENV.API_BASE_URL });
 
 // Add a request interceptor
-request.interceptors.request.use(config => {
+dataRequest.interceptors.request.use(config => {
   config.headers.Authorization = `Bearer ${TokenUtils.getToken()}`;
   // Do something before request is sent
   return config;
@@ -59,7 +60,7 @@ request.interceptors.request.use(config => {
   return Promise.reject(error);
 });
 
-request.interceptors.response.use(function (response) {
+dataRequest.interceptors.response.use(function (response) {
   const {
     code,
     msg
@@ -86,7 +87,7 @@ request.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 
-export default request;
+export default dataRequest;
 
 const login = axios.create({
   baseURL: APP_ENV.API_BASE_URL,
@@ -109,6 +110,6 @@ login.interceptors.response.use(function (response) {
 
 export {
   login,
-  trxRequest
+  request
 };
 

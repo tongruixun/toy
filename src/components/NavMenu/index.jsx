@@ -17,9 +17,9 @@ const navConfig = [
     title: '关于',
     icon: 'aboutme'
   }, {
-    path: '/',
+    path: '/dataCharts',
     title: '功能测试页',
-    icon: 'xinjian'
+    icon: 'chart'
   }, {
     path: '/',
     title: '数据录入',
