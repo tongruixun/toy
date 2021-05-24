@@ -14,11 +14,11 @@ const navConfig = [
     icon: 'home'
   }, {
     path: '/record/Login',
-    title: '关于',
+    title: '后台管理',
     icon: 'aboutme'
   }, {
     path: '/dataCharts',
-    title: '功能测试页',
+    title: '测试功能',
     icon: 'chart'
   }, {
     path: '/',

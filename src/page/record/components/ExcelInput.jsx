@@ -26,7 +26,6 @@ function ExcelInput({ onChange }) {
       } catch (e) {
         // 这里可以抛出文件类型错误不正确的相关提示
         console.log('文件类型不正确');
-        return;
       }
     };
     // 以二进制方式打开文件

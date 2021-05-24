@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, Input, Table, Space, Popconfirm } from 'antd';
+import { Button, Form, Input, Table, Space, Popconfirm, message } from 'antd';
 import PropTypes from 'prop-types';
 import SpaceBetween from '@/page/record/components/SpaceBetween';
 import CustomModal from '@/page/record/components/CustomModal';
@@ -11,6 +11,7 @@ function Role() {
   const [form] = Form.useForm();
   const [dataSource, setDataSource] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [show, setShow] = useState(false);
   const [row, setRow] = useState({});
 
   function onCancel() {
@@ -107,18 +108,42 @@ function Role() {
     setVisible(true);
   }
 
+  function onFinish({ secretKey }) {
+
+    if (secretKey === 'tongruixun') {
+      setShow(true);
+    } else {
+      message.error('验证失败');
+    }
+  }
+
   return <div className={styles.wrap}>
-    <SpaceBetween add={add}/>
-    <Table rowKey='id' columns={columns} dataSource={dataSource}/>
-    <RoleModal
-      form={form}
-      visible={visible}
-      row={row}
-      onOk={onOk}
-      onCancel={onCancel}
-      handleSubmit={handleSubmit}
-      isEdit={!!(row.id || row.id === 0)}
-    />
+    {
+      show ? <>
+        <SpaceBetween add={add}/>
+        <Table rowKey='id' columns={columns} dataSource={dataSource}/>
+        <RoleModal
+          form={form}
+          visible={visible}
+          row={row}
+          onOk={onOk}
+          onCancel={onCancel}
+          handleSubmit={handleSubmit}
+          isEdit={!!(row.id || row.id === 0)}
+        />
+      </> : <>
+        <Form layout='inline' form={form} onFinish={onFinish}>
+          <Form.Item label='秘钥' name='secretKey'>
+            <Input type='password'/>
+          </Form.Item>
+          <Form.Item>
+            <Button type='primary' htmlType='submit'>用户验证</Button>
+          </Form.Item>
+        </Form>
+      </>
+    }
+
+
   </div>;
 }
 
