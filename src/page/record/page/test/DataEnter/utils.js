@@ -27,3 +27,22 @@ export function numberToHex(value) {
 
   return result;
 }
+
+export function deviceObjToArr(deviceObj) {
+  let result = [];
+
+  Object.keys(deviceObj)
+    .forEach(item => {
+      let device = {};
+      device.label = item;
+      device.value = item;
+      if (Object.prototype.toString.call(deviceObj[item]) === '[object Object]') {
+        device.children = deviceObjToArr(deviceObj[item]);
+      } else {
+        device.value = deviceObj[item];
+      }
+      result.push(device);
+    });
+
+  return result;
+}

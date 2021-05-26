@@ -17,6 +17,7 @@ import styles from './index.less';
 import Terminal from './Terminal';
 import Sensor from './Sensor';
 import MonitorPoint from './MonitorPoint';
+import MPNoGroup from './MPNoGroup';
 
 const { TabPane } = Tabs;
 
@@ -71,8 +72,8 @@ function DataEnter() {
         projectId={projectId}
         initialValues={{
           baseUrl: 'http://gateway.zdjcyun.com',
-          token: 'd5f4d209-8940-4e31-a26a-257a0938f8db',
-          projectId: 'PR2021042900008'
+          token: '0be8dff7-fb73-4571-8242-68562736ab2d',
+          projectId: 'PR2021042900005'
         }}/>
       <Divider/>
       <Tabs defaultActiveKey="1">
@@ -91,6 +92,12 @@ function DataEnter() {
         </TabPane>
         <TabPane tab="添加测点" key="3">
           <MonitorPoint
+            setLoading={setLoading}
+            projectId={projectId}
+          />
+        </TabPane>
+        <TabPane tab="添加测点(自动分组版)" key="4">
+          <MPNoGroup
             setLoading={setLoading}
             projectId={projectId}
           />

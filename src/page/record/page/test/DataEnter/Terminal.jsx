@@ -8,13 +8,10 @@ import {
   message,
   Select,
   InputNumber,
-  Table,
+  Table, Cascader
 } from 'antd';
 import { deviceApi } from '../../../service';
-import { generateId } from './utils';
-import 'antd/dist/antd.css';
-
-const { Option } = Select;
+import { generateId, deviceObjToArr } from './utils';
 
 const timeUnit = ['秒', '分', '时', '日'];
 
@@ -25,11 +22,7 @@ function Terminal({
 }) {
 
   const [form] = Form.useForm();
-  const [terminalList, setTerminalList] = useState({
-    factory: [],
-    device: [],
-    model: []
-  });
+  const [terminalOptions, setTerminalOptions] = useState([]);
   const [batchTerminals, setBatchTerminals] = useState({
     params: [],
     overView: []
@@ -37,66 +30,35 @@ function Terminal({
 
   useEffect(() => {
     if (Object.keys(baseTerminals).length > 0) {
-      setTerminalList(origin => ({
-        ...origin,
-        factory: Object.keys(baseTerminals)
-      }));
+      setTerminalOptions(deviceObjToArr(baseTerminals)
+        .filter(({ label }) => {
+          return label === '山东有人' || label === '厦门四信';
+        }));
     }
   }, [baseTerminals]);
 
   function resetTerminal() {
     form.resetFields();
-    setTerminalList(origin => ({
-      ...origin,
-      device: [],
-      model: []
-    }));
     setBatchTerminals({
       params: [],
       overView: []
     });
   }
 
-  function handleFactorySelect(type, value) {
-    if (type === 'factory') {
-      form.resetFields(['device', 'model']);
-      setTerminalList(origin => {
-        return {
-          ...origin,
-          device: Object.keys(baseTerminals[value])
-        };
-      });
-    }
-
-    if (type === 'device') {
-      form.resetFields(['model']);
-      const factory = form.getFieldValue('factory');
-      setTerminalList(origin => {
-        return {
-          ...origin,
-          model: Object.keys(baseTerminals[factory][value])
-        };
-      });
-    }
-  }
-
   // 拼接数据，批量添加终端
   function joinTerminal(values) {
     setLoading(true);
     const {
-      factory,
-      device,
-      model,
       collectInterval,
       number,
       frequencyUnit,
-      customName
+      customName,
+      terminalMap
     } = values;
-    const baseTerminalId = baseTerminals[factory][device][model];
+
+    let [factoryName, deviceName, baseTerminalId] = terminalMap;
     const params = [];
     const overView = [];
-
-    let deviceName = device;
 
     if (customName) {
       deviceName = customName;
@@ -115,9 +77,9 @@ function Terminal({
               terminalId: item
             });
             overView.push({
-              factory,
-              device,
-              model,
+              factory: factoryName,
+              device: deviceName,
+              model: baseTerminalId,
               terminalId: item,
               collectInterval,
               frequencyUnit
@@ -176,46 +138,11 @@ function Terminal({
   const style = { width: 160 };
   return <div>
     <Form form={form} onFinish={addTerminal} layout="inline">
-      <Form.Item label='设备厂家' name='factory' rules={[{
+      <Form.Item label='终端设备' name='terminalMap' rules={[{
         required: true,
-        message: '请选择设备厂家'
+        message: '请选择终端设备'
       }]}>
-        <Select
-          style={style}
-          onSelect={(value) => handleFactorySelect('factory', value)}
-          placeholder='请选择设备厂家'
-          options={terminalList.factory.map(item => ({
-            label: item,
-            value: item
-          }))}
-        />
-      </Form.Item>
-      <Form.Item label='设备名称' name='device' rules={[{
-        required: true,
-        message: '请选择设备名称'
-      }]}>
-        <Select
-          style={style}
-          onSelect={(value) => handleFactorySelect('device', value)}
-          placeholder='请选择设备名称'
-          options={terminalList.device.map(item => ({
-            label: item,
-            value: item
-          }))}
-        />
-      </Form.Item>
-      <Form.Item label='设备型号' name='model' rules={[{
-        required: true,
-        message: '请选择设备型号'
-      }]}>
-        <Select
-          style={style}
-          placeholder='请选择设备型号'
-          options={terminalList.model.map(item => ({
-            label: item,
-            value: item
-          }))}
-        />
+        <Cascader style={{ width: 360 }} options={terminalOptions} placeholder="厂家/设备/模型编号"/>
       </Form.Item>
       <Form.Item
         label='采集间隔'
@@ -234,12 +161,13 @@ function Terminal({
       >
         <Input addonAfter={(
           <Form.Item name='frequencyUnit' initialValue={1} noStyle>
-            <Select style={{ width: 60 }}>
-              {
-                timeUnit.map((item, index) => <Option key={index}
-                                                      value={index}>{item}</Option>)
-              }
-            </Select>
+            <Select
+              style={{ width: 60 }}
+              options={timeUnit.map((item, index) => ({
+                label: item,
+                value: index
+              }))}
+            />
           </Form.Item>
         )} style={style}/>
       </Form.Item>

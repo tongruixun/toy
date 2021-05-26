@@ -10,9 +10,9 @@ import {
   Radio
 } from 'antd';
 import { monitorItemPoint } from '../../../service';
-import 'antd/dist/antd.css';
 import ExcelInput from '@/page/record/components/ExcelInput';
 import { debounce } from '@/util/util';
+import { RedoOutlined } from '@ant-design/icons';
 
 function MonitorPoint({
   projectId,
@@ -107,6 +107,30 @@ function MonitorPoint({
               formData.append('projectId', projectId);
               formData.append('deviceVOs', deviceVOs);
 
+              // {"paramName":"高度","param":"h","paramValue":10,"unit":"mm","isInput":true},{"paramName":"角度","param":"α","paramValue":0,"unit":"°","isInput":false}
+              // 添加地下水位时的附加参数
+              if (monitorType === 'tilt') {
+                let formulaParam = JSON.stringify([
+                  {
+                    paramName: '高度',
+                    param: 'h',
+                    paramValue: 10,
+                    unit: 'mm',
+                    isInput: true
+                  },
+                  {
+                    paramName: '角度',
+                    param: 'α',
+                    paramValue: 0,
+                    unit: '°',
+                    isInput: false
+                  }
+                ]);
+
+                formData.append('formulaId', '1');
+                formData.append('formulaParam', formulaParam);
+              }
+
               // 添加地下水位时的附加参数
               if (monitorType === 'waterLevel') {
                 let formulaParam = JSON.stringify([
@@ -151,6 +175,7 @@ function MonitorPoint({
   }
 
   function getGroupName(itemId) {
+    form.resetFields(['groupName']);
     monitorItemPoint.getGroupNameByMonitorItem({
       projectId,
       itemId
@@ -189,33 +214,6 @@ function MonitorPoint({
 
   const style = { width: 160 };
   return <div>
-    <Radio.Group
-      onChange={e => {
-        setMonitorType(e.target.value);
-      }}
-      value={monitorType}
-      options={[
-        {
-          label: '普通测项',
-          value: 'normal'
-        },
-        {
-          label: '地下水位',
-          value: 'waterLevel'
-        },
-        {
-          label: '深部位移（倾斜）',
-          value: 'deep'
-        },
-      ]}
-    />
-    {
-      monitorType === 'deep' && (<>
-        <strong>当添加的测点为</strong> <strong
-        style={{ color: 'red' }}>深部位移</strong>时,第一个值为测点名称，后续的值为要添加的深度&ensp;
-      </>)
-    }
-    <Divider/>
     <div>
       <div>
         <strong>方式一:</strong> 读取<strong style={{ color: 'red' }}>Excel表格第一行</strong>的数据作为测点名称&ensp;
@@ -233,7 +231,42 @@ function MonitorPoint({
       </div>
     </div>
     <Divider/>
+    <Radio.Group
+      onChange={e => {
+        setMonitorType(e.target.value);
+      }}
+      value={monitorType}
+      options={[
+        {
+          label: '普通测项',
+          value: 'normal'
+        }, {
+          label: '地下水位',
+          value: 'waterLevel'
+        }, {
+          label: '倾斜',
+          value: 'tilt'
+        }, {
+          label: '深部位移',
+          value: 'deep'
+        },
+      ]}
+    />
+    {
+      monitorType === 'deep' && (<>
+        <strong>当添加的测点为</strong> <strong
+        style={{ color: 'red' }}>深部位移</strong>时,第一个值为测点名称，后续的值为要添加的深度&ensp;
+      </>)
+    }
+    <Divider/>
     <Form form={form} onFinish={onFinish} layout="inline">
+      <Form.Item>
+        <Button
+          icon={<RedoOutlined/>}
+          onClick={() => getMonitorItemPoint(projectId)}
+          type="link"
+        >重新拉取测项</Button>
+      </Form.Item>
       <Form.Item
         label='监测测项'
         name='monitorItemId'

@@ -62,13 +62,29 @@ function getGenerateId(deviceType) {
     });
 }
 
+/**
+ * 获得现有终端树形数据
+ * @param projectId
+ * @returns {AxiosPromise}
+ */
+function getTerminalTree(projectId) {
+    return dataRequest({
+        url: "/monitor/project/terminal/terminalTree",
+        method: "get",
+        params: {
+            projectId
+        }
+    });
+}
+
 export const deviceApi = {
     getBaseTerminals,
     getGenerateId,
     addTerminals,
     getTerminalDetail,
     getBaseSensor,
-    addSensors
+    addSensors,
+    getTerminalTree
 }
 
 

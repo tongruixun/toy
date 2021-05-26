@@ -6,59 +6,47 @@ import {
   Button,
   Divider,
   message,
-  Select,
   InputNumber,
-  Table,
+  Table, Cascader, Spin,
 } from 'antd';
 import { deviceApi } from '../../../service';
-import { generateId, numberToHex } from './utils';
-import 'antd/dist/antd.css';
+import { generateId, numberToHex, deviceObjToArr } from './utils';
+import styles from './index.less';
 
 function Sensor({
-  projectId,
-  setLoading
+  projectId
 }) {
 
   const [form] = Form.useForm();
-  const [configForm] = Form.useForm();
+  const [sensorOptions, setSensorOptions] = useState([]);
   const [terminalId, setTerminalId] = useState('');
-  const [baseSensors, setBaseSensors] = useState({});
-  const [sensorList, setSensorList] = useState({
-    factory: [],
-    device: [],
-    model: []
-  });
-  const [batchSensors, setBatchSensors] = useState({
-    params: [],
-    overView: []
-  });
+  const [loading, setLoading] = useState(false);
+  const [terminalTree, setTerminalTree] = useState();
 
   function reset() {
     form.resetFields();
-    setBatchSensors({
-      params: [],
-      overView: []
-    });
-    setSensorList(origin => ({
-      ...origin,
-      device: [],
-      model: []
-    }));
+  }
+
+  function getTerminalTree(id) {
+    deviceApi.getTerminalTree(id)
+      .then(({ data }) => {
+        setTerminalTree(data);
+      });
   }
 
   function joinSensor(values) {
     const {
-      factory,
-      device,
-      model,
       number,
       terminalChannel,
       sensorAddr,
-      timingFactor
+      timingFactor,
+      sensorMap
     } = values;
-    const baseSensorId = baseSensors[factory][device][model];
+
+    let deviceName = sensorMap[1];
+    let baseSensorId = sensorMap[2];
+
     const params = [];
-    const overView = [];
 
     return new Promise((resolve) => {
       generateId('sensor', number)
@@ -66,7 +54,7 @@ function Sensor({
           res.forEach(item => {
             params.push({
               baseSensorId,
-              customName: device,
+              customName: deviceName,
               terminalId,
               projectId,
               sensorId: item,
@@ -74,50 +62,19 @@ function Sensor({
               terminalChannel,
               timingFactor
             });
-            overView.push({
-              factory,
-              device,
-              model,
-              sensorId: item,
-              terminalChannel,
-              sensorAddr,
-              timingFactor
-            });
           });
-          resolve({
-            params,
-            overView
-          });
+          resolve(params);
         });
     });
-  }
-
-  function overView() {
-    form.validateFields()
-      .then(values => {
-        setLoading(true);
-        joinSensor(values)
-          .then(res => {
-            setBatchSensors(res);
-            setLoading(false);
-          })
-          .catch(() => {
-            setLoading(false);
-          });
-      });
   }
 
   function addSensor(values) {
     setLoading(true);
     new Promise((resolve) => {
-      if (batchSensors.params.length > 0) {
-        resolve(batchSensors.params);
-      } else {
-        joinSensor(values)
-          .then(res => {
-            resolve(res.params);
-          });
-      }
+      joinSensor(values)
+        .then(res => {
+          resolve(res);
+        });
     }).then(params => {
       return deviceApi.addSensors(params)
         .then(function () {
@@ -131,37 +88,10 @@ function Sensor({
       });
   }
 
-  function handleFactorySelect(type, value) {
-    if (type === 'factory') {
-      form.resetFields(['device', 'model']);
-      setSensorList(origin => {
-        return {
-          ...origin,
-          device: Object.keys(baseSensors[value])
-        };
-      });
-    }
-
-    if (type === 'device') {
-      form.resetFields(['model']);
-      const factory = form.getFieldValue('factory');
-      setSensorList(origin => {
-        return {
-          ...origin,
-          model: Object.keys(baseSensors[factory][value])
-        };
-      });
-    }
-  }
-
   function getBaseSensor(baseId) {
     deviceApi.getBaseSensor(baseId)
       .then(({ data }) => {
-        setSensorList(origin => ({
-          ...origin,
-          factory: Object.keys(data)
-        }));
-        setBaseSensors(data);
+        setSensorOptions(deviceObjToArr(data));
       })
       .catch(err => console.log(err));
   }
@@ -172,11 +102,6 @@ function Sensor({
         getBaseSensor(data.baseTerminalId);
       })
       .catch(err => console.log(err));
-  }
-
-  function handleConfig({ terminalId }) {
-    setTerminalId(terminalId);
-    getTerminalDetail(terminalId);
   }
 
   function terminalIdChange(value) {
@@ -190,161 +115,117 @@ function Sensor({
 
   const columns = [
     {
-      title: '设备厂家',
-      dataIndex: 'factory'
+      title: '终端名称',
+      dataIndex: 'deviceName'
     }, {
-      title: '设备名称',
-      dataIndex: 'device'
-    }, {
-      title: '设备型号',
-      dataIndex: 'model'
-    }, {
-      title: '设备编号',
-      dataIndex: 'sensorId'
-    }, {
-      title: '通道号',
-      dataIndex: 'terminalChannel'
-    }, {
-      title: '传感器地址',
-      dataIndex: 'sensorAddr'
-    }, {
-      title: '传感器标定系数',
-      dataIndex: 'timingFactor'
+      title: '终端编号',
+      dataIndex: 'deviceId',
+      render(text) {
+        if (text === terminalId) {
+          return <span style={{ color: 'red' }}> {text}</span>;
+        }
+        return text;
+      }
     }
   ];
 
-  return <div>
-    <Form form={configForm} onFinish={handleConfig} layout="inline">
-      <Form.Item
-        label="终端编号"
-        name="terminalId"
-        rules={[{
-          required: true,
-          message: '终端编号'
-        }, {
-          len: 15,
-          message: '终端编号的长度为15'
-        }]}>
-        <Input placeholder="终端编号" onChange={e => terminalIdChange(e.target.value)}/>
-      </Form.Item>
-      <Form.Item>
+  return <div className={styles.sensor}>
+    <div className={styles.left}>
+      <Button onClick={() => getTerminalTree(projectId)} type="primary">查询已有终端</Button>
+      <Table
+        rowKey="deviceId"
+        size="small"
+        pagination={false}
+        columns={columns}
+        dataSource={terminalTree}
+      />
+    </div>
+    <div className={styles.right}>
+      <Spin spinning={loading}>
         当前终端编号:
         <strong
           style={{ color: terminalId ? 'black' : 'red' }}>{terminalId ? terminalId : '需设置终端编号'}</strong>
-      </Form.Item>
-    </Form>
-    <Divider/>
-    <Form form={form} onFinish={addSensor} layout="inline">
-      <Form.Item label='设备厂家' name='factory' rules={[{
-        required: true,
-        message: '请选择设备厂家'
-      }]}>
-        <Select
-          style={style}
-          onSelect={(value) => handleFactorySelect('factory', value)}
-          placeholder='请选择设备厂家'
-          options={sensorList.factory.map(item => ({
-            label: item,
-            value: item
-          }))}
-        />
-      </Form.Item>
-      <Form.Item label='设备名称' name='device' rules={[{
-        required: true,
-        message: '请选择设备名称'
-      }]}>
-        <Select
-          style={style}
-          onSelect={(value) => handleFactorySelect('device', value)}
-          placeholder='请选择设备名称'
-          options={sensorList.device.map(item => ({
-            label: item,
-            value: item
-          }))}
-        />
-      </Form.Item>
-      <Form.Item label='设备型号' name='model' rules={[{
-        required: true,
-        message: '请选择设备型号'
-      }]}>
-        <Select
-          style={style}
-          placeholder='请选择设备型号'
-          options={sensorList.model.map(item => ({
-            label: item,
-            value: item
-          }))}
-        />
-      </Form.Item>
-      <Divider/>
-      <Form.Item
-        label='通道号'
-        name='terminalChannel'
-        rules={[
-          {
+        <Divider/>
+        <Form form={form} onFinish={addSensor} layout="inline">
+          <Form.Item
+            label='通道号'
+            name='terminalChannel'
+            rules={[
+              {
+                required: true,
+                message: '请输入通道号'
+              },
+              {
+                pattern: /^[0-9]{1,2}$/g,
+                message: '请输入长度小于2的整数'
+              }
+            ]}
+            initialValue={1}
+          >
+            <Input placeholder="请输入通道号"/>
+          </Form.Item>
+          <Form.Item
+            label='传感器地址'
+            name='sensorAddr'
+            rules={[
+              {
+                pattern: /^[0-9]+$/g,
+                message: '请输入长度小于2的整数'
+              }
+            ]}
+            initialValue={1}
+          >
+            <Input style={style} placeholder="示例:1234"/>
+          </Form.Item>
+          <Form.Item
+            label='标定系数'
+            name='timingFactor'
+            rules={[
+              {
+                required: true,
+                message: '请输入标定系数'
+              },
+              {
+                pattern: /^([0-9]$)|(^[0-9]\.[0-9]{1,8})$/g,
+                message: '请输入小于10的数字'
+              }
+            ]}
+            initialValue={1}
+          >
+            <Input style={style} placeholder="请输入标定系数"/>
+          </Form.Item>
+          <Divider/>
+          <Form.Item
+            label="终端编号"
+            name="terminalId"
+            rules={[{
+              required: true,
+              message: '终端编号'
+            }, {
+              len: 15,
+              message: '终端编号的长度为15'
+            }]}>
+            <Input placeholder="终端编号" onChange={e => terminalIdChange(e.target.value)}/>
+          </Form.Item>
+          <Form.Item label='传感器设备' name='sensorMap' rules={[{
             required: true,
-            message: '请输入通道号'
-          },
-          {
-            pattern: /^[0-9]{1,2}$/g,
-            message: '请输入长度小于2的整数'
-          }
-        ]}
-        initialValue={1}
-      >
-        <Input placeholder="请输入通道号"/>
-      </Form.Item>
-      <Form.Item
-        label='传感器地址'
-        name='sensorAddr'
-        rules={[
-          {
-            pattern: /^[0-9]+$/g,
-            message: '请输入长度小于2的整数'
-          }
-        ]}
-        initialValue={1}
-      >
-        <Input style={style} placeholder="示例:1234"/>
-      </Form.Item>
-      <Form.Item
-        label='标定系数'
-        name='timingFactor'
-        rules={[
-          {
-            required: true,
-            message: '请输入标定系数'
-          },
-          {
-            pattern: /^([0-9]$)|(^[0-9]\.[0-9]{1,8})$/g,
-            message: '请输入小于10的数字'
-          }
-        ]}
-        initialValue={1}
-      >
-        <Input style={style} placeholder="请输入标定系数"/>
-      </Form.Item>
-      <Form.Item label='数量' name="number">
-        <InputNumber style={style} min={1} max={200}/>
-      </Form.Item>
-      <Form.Item>
-        <Button htmlType='submit' type="primary">添加传感器</Button>
-      </Form.Item>
-      <Form.Item>
-        <Button onClick={overView} type="primary">预览</Button>
-      </Form.Item>
-      <Form.Item>
-        <Button onClick={reset} danger type="primary">重置</Button>
-      </Form.Item>
-    </Form>
-    <Divider/>
-    <Table
-      rowKey="sensorId"
-      size="small"
-      pagination={false}
-      columns={columns}
-      dataSource={batchSensors.overView}
-    />
+            message: '请选择传感器设备'
+          }]}>
+            <Cascader style={{ width: 360 }} options={sensorOptions} placeholder="厂家/设备/模型编号"/>
+          </Form.Item>
+          <Form.Item label='数量' name="number">
+            <InputNumber style={style} min={1} max={200}/>
+          </Form.Item>
+          <Divider/>
+          <Form.Item>
+            <Button htmlType='submit' type="primary">添加传感器</Button>
+          </Form.Item>
+          <Form.Item>
+            <Button onClick={reset} danger type="primary">重置</Button>
+          </Form.Item>
+        </Form>
+      </Spin>
+    </div>
   </div>;
 }
 
