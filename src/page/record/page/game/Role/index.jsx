@@ -118,11 +118,9 @@ function Role() {
   }
 
   return <div className={styles.wrap}>
-    {
-      show ? <>
-        <SpaceBetween add={add}/>
-        <Table rowKey='id' columns={columns} dataSource={dataSource}/>
-        <RoleModal
+      <SpaceBetween add={add}/>
+      <Table rowKey='id' columns={columns} dataSource={dataSource}/>
+      <RoleModal
           form={form}
           visible={visible}
           row={row}
@@ -130,20 +128,7 @@ function Role() {
           onCancel={onCancel}
           handleSubmit={handleSubmit}
           isEdit={!!(row.id || row.id === 0)}
-        />
-      </> : <>
-        <Form layout='inline' form={form} onFinish={onFinish}>
-          <Form.Item label='秘钥' name='secretKey'>
-            <Input type='password'/>
-          </Form.Item>
-          <Form.Item>
-            <Button type='primary' htmlType='submit'>用户验证</Button>
-          </Form.Item>
-        </Form>
-      </>
-    }
-
-
+      />
   </div>;
 }
 

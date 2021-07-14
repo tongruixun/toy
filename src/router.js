@@ -63,6 +63,19 @@ const routes = [
             ]
           },
           {
+            title: '博客管理',
+            path: '/blog',
+            icon: 'blog',
+            component: '/layout/BasicLayout',
+            routes: [
+              {
+                title: '文章管理',
+                path: '/post',
+                component: '@r/page/blog/Post'
+              }
+            ]
+          },
+          {
             title: '角色管理',
             path: '/game',
             icon: 'game',

@@ -1,6 +1,39 @@
 import axios from 'axios';
 import TokenUtils from '@/util/token';
 
+let blogBaseUrl = 'http://localhost:9002';
+
+if (APP_EVN === 'dev') {
+  blogBaseUrl = 'http://localhost:9002';
+} else {
+  blogBaseUrl = 'http://106.15.249.68:7001';
+}
+
+const blog = axios.create({
+  baseURL: blogBaseUrl
+});
+
+blog.interceptors.request.use(config => {
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+
+blog.interceptors.response.use(function (response) {
+  const {
+    code,
+    data
+  } = response.data;
+  if (code === 200) {
+    return data;
+  } else {
+    return Promise.reject(data);
+  }
+}, function (error) {
+  return Promise.reject(error);
+});
+
+// ---------------------------------------------
 // 个人网站axios实例
 let baseUrl = 'http://localhost:7001';
 if (APP_EVN === 'dev') {
@@ -110,6 +143,7 @@ login.interceptors.response.use(function (response) {
 
 export {
   login,
-  request
+  request,
+  blog
 };
 

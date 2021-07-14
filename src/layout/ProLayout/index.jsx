@@ -6,13 +6,15 @@ import { aboutRoutes } from '@/router';
 import {
   PieChartOutlined,
   UserOutlined,
-  HomeOutlined
+  HomeOutlined,
+  ReadOutlined
 } from '@ant-design/icons';
 
 const iconMap = {
   test: <PieChartOutlined/>,
   game: <UserOutlined/>,
-  home: <HomeOutlined />
+  home: <HomeOutlined />,
+  blog: <ReadOutlined />
 };
 
 const {
